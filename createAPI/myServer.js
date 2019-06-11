@@ -4,8 +4,6 @@ var sql = require("mssql");
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
-//test 
-
 //Define CONST.
 PORT = "8000";
 FILEDESTINATION = "uploads/images/avatars";
