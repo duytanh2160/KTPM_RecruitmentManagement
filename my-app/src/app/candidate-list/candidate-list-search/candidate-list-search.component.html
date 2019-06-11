@@ -1,0 +1,81 @@
+<div class="row" style="margin-top: 20px;">
+    <div class="col-sm-10" style="padding-right:0;">
+        <form>
+            <input [(ngModel)]="search" name="search" (ngModelChange)="onSearchSubmit({searchVal : search, jobSearch : job, deleteFlag : DeleteFlag})" required ngModel id="searchBar" type="text" placeholder="Search..">
+        </form>
+    </div>
+    <div class="col-sm-2" style="padding-left:0;">
+        <button onclick="w3_toggle()" class="btn btn-primary infoButton" style="margin-left:10px;">
+            <i class="fa fa-info" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-primary" style="float:right;width:100px;height:52px;"
+                data-toggle="modal" data-target="#advSearchCand">Filter</button>
+    </div>
+  </div>
+
+
+
+  <!-- The AdvSearch Modal -->
+<div class="modal fade" id="advSearchCand">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Advance Search</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <label class="font-weight-bold" for="DeleteFlag">Show Deleted Candidate Only</label>
+                <select [(ngModel)]="DeleteFlag" name="DeleteFlag" class="form-control" id="DeleteFlag">
+                    <option value="N">No</option>
+                    <option value="Y">Yes</option>
+                </select>
+                <label class="font-weight-bold" for="job">Job</label>
+                <select [(ngModel)]="job" name="job" class="form-control" id="job">
+                    <option selected value="">All</option>
+                    <option *ngFor="let job of JobList" value={{job.Name}}>{{job.Name}}</option>
+                </select>
+                <label class="font-weight-bold" for="level">Level</label>
+                <select [(ngModel)]="Level" class="form-control" id="Level">
+                    <option value="">All</option>
+                    <option *ngFor="let level of JobLevelList" value={{level.Name}}>{{level.Name}}</option>
+                </select>
+                <label class="font-weight-bold" for="stage">Stage</label>
+                <select class="form-control" id="stage">
+                    <option value="">All</option>
+                    <option value="Interviewing">Interviewing</option>
+                    <option value="Offering">Offering</option>
+                    <option value="Probation">Probation</option>
+                </select>
+                <label class="font-weight-bold" for="stage">Experience year</label>
+                <input class="form-control" type="number" id="expYears" min="1" max="30">
+                <label class="font-weight-bold" for="stage">Result</label>
+                <select class="form-control" id="result">
+                    <option value="">All</option>
+                    <option value="null">Waiting</option>
+                    <option value="pass">Passed</option>
+                    <option value="fail">Failed</option>
+                    <option value="null">Other</option>
+                </select>
+                <label class="font-weight-bold" for="stage">Gender</label>
+                <select required class="form-control" id="sex">
+                    <option value="">All</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="any">Any</option>
+                </select>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onSearchSubmit({searchVal : search, jobSearch : job, levelSearch : Level , deleteFlag : DeleteFlag})">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

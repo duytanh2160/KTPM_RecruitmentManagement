@@ -1,0 +1,41 @@
+#searchBar[type=text] {
+    float:right;
+    width: 250px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('../images/kinhlup.png');
+    background-size: 25px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  #searchBar[type=text]:focus {
+    width: 75%;
+  }
+
+  @media screen and (max-width: 1100px) {
+    #searchBar[type=text]:focus {
+      width: 50%;
+    }
+  }
+
+
+/*Iconbar (the arrow button use for opening sidebar*/
+
+
+.icon-bar {
+  position: fixed;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: auto;
+  height: auto;
+  text-align: center;
+  margin-top:400px;
+  z-index: 10;
+}

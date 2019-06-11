@@ -1,0 +1,183 @@
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right " style="display:none;width:22%;right:0" id="mySideBar">
+  <button class="w3-bar-item w3-button w3-large" onclick="w3_toggle()" style="float:right;">
+      ×</button>
+  <ul class="list-unstyled components">
+      <!--CANDIDATE-HISTORY-->
+      <li class="active">
+          <div style="text-align: center">
+              <img src="../../assets/images/avatar.jpg" class="profileImg" alt="">
+              <div style="margin-top:10px;">
+                  <span style="font-size: 160%;">Nguyen Huy Vuong Nam</span>
+              </div>
+              <div style="font-size: 100%;">
+                  <label>Job: </label><span> Java</span>
+              </div>
+          </div>
+          <div class="card" style="border:0;">
+              <!--Tab Select-->
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item">
+                      <a class="nav-link active show" id="detail-tab" data-toggle="tab" href="#detail" role="tab" aria-controls="detail" aria-selected="true">Detail</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">History</a>
+                  </li>
+              </ul>
+              <div class="card-body">
+                  <!--Tab Content-->
+                  <div class="tab-content" id="detailTabContent">
+                      <div class="tab-pane fade in active show" id="detail">
+                          <div class="tab-item">
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Name: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candName">Nguyen Huy Vuong Nam</span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Gender: </span>
+                                  </div>
+                                  <div class="col-md-7">
+                                      <span id="candGender">Female</span>
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Birthday: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candBirthday"></span>
+                                      JAN 01 1970
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Phone: </span>
+                                  </div>
+                                  <div class="col-md-7">
+                                      <span id="candPhone"></span>0776946434
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Email: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candEmail"></span>huydeftry@gmail.com
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Address: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candAddress"></span>396/18C10/1
+                                      Truong Chinh P14 Q12
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Job: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candJob"></span>Java Developer
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Level: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candPos"></span>Senior
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Skill: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candSkill"></span>Java,
+                                      ReactJS, NodeJS
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Exp: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candExp"></span>4 years
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>University: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candUniversity"></span>HSU
+                                      University
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Source: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candSource"></span>itviet.net
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Action: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candAction"></span>Interview
+                                  </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-5 itemLabel">
+                                      <span>Result: </span>
+                                  </div>
+                                  <div class="col-md-7"><span id="candResult"></span>Pass
+                                  </div>
+                              </div>
+                              <div><span class="itemLabel">Evaluation</span>
+                                  <p>
+                                              <textarea name="noteHR" rows="5" cols="28" disabled="" style="margin-top:10px;width:105%;" placeholder="Hello..."></textarea>
+                                  </p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="tab-pane fade" id="history">
+                          <h3>Today</h3>
+                          <div class="changed#1">
+                              <label>01:02:03</label>
+                              <div class="info-edited">
+                                  <img src="" style="border-radius:50%" width="50" alt="">
+                                  <label>Username: </label> <span>Thu Dao</span> <br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <label>Name: </label><label> "Nu"</label> → <label>"Nam"</label>
+                              </div>
+                          </div>
+
+                          <div class="change#2">
+                              <label>00:30:02</label>
+                              <div class="info-edited">
+                                  <img src="" style="border-radius:50%" width="50" alt="">
+                                  <label>Username: </label> <span>Thu Dao</span> <br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <label>Gender: </label><label> "Male"</label> → <label>"Female"</label>
+                              </div>
+                          </div>
+
+
+                          <h3>16/09/2019</h3>
+                          <div class="change#3">
+                              <label>09:55:43</label>
+                              <div class="info-edited">
+                                  <img src="" style="border-radius:50%" width="50" alt="">
+                                  <label>Username: </label> <span>Thuan Tran</span> <br>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <label>Job: </label><label> "R&amp;D"</label> → <label>"Java
+                                  Developer"</label>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </li>
+  </ul>
+</div>

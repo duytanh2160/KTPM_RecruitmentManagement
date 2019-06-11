@@ -1,0 +1,85 @@
+html, body{
+    margin: 0;
+    height: 100%;
+    background-color: rgb(204, 230, 255);
+    /*background-image: url("background.png");
+    background-repeat: no-repeat;*/
+  }
+
+.card{
+  box-shadow: 5px 10px 8px rgb(51, 0, 0);
+  z-index: 10;
+
+}
+
+
+.card-img-left{
+  background-image: url("dounets.png");
+  width: 45%;
+  height: 300px;
+  margin:2rem;
+}
+
+.blur{
+  height: 100%;
+  width: 100%;
+}
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 5px 10px 8px rgb(51, 0, 0);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-signin .btn {
+  font-size: 80%;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  height: auto;
+  border-radius: 2rem;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+  /*padding: var(--input-padding-y) var(--input-padding-x);*/
+}
+
+.form-label-group>label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}

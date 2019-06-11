@@ -1,0 +1,158 @@
+<title>Candidate List</title>
+<div class="row" style="margin-top: 80px;">
+    <div class="col-sm-12">
+        <button class="btn btn-primary" data-toggle="modal" data-target="#addCandidateForm"
+                style="float:right;width:162px;height:52px;" (click)="onOpenAddFormClick()" onclick="openCandidateForm()">Add</button>
+    </div>
+</div>
+
+
+<!--ADD CANDIDATE-->
+<div class="modal fade" id="addCandidateForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div style="max-width:900px;" class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="model-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-header">
+                <div class="picture-container">
+                    <div class="picture">
+                        <img src="../../assets/images/image-select-default.png"
+                             class="picture-src" id="wizardPicturePreview" title="">
+                        <input  (change)="onFileChangeEvent($event)" formenctype="multipart/form-data" [(ngModel)]="currentCandidate.Image" name="Image" type="file" accept="image/*" id="wizard-picture" class="">
+                    </div>
+                    <h6 *ngIf="isAddForm" style="margin-top: 20px;" class="">Choose Picture</h6>
+
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <form id="AddForm" #f="ngForm" ngNativeValidate name="AddForm"  (ngSubmit)="onSubmit(currentCandidate,files)"> 
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="form-row">
+                                <div class="form-group col-md-9">
+                                    <label class="font-weight-bold" for="Name">Name(<i class="mandatory">*</i>) </label>
+                                    <input [(ngModel)]="currentCandidate.Fullname" required type="text" class="form-control" name="Fullname" id="Name" placeholder="Name" required>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="font-weight-bold" for="sex">Gender(<i class="mandatory">*</i>)</label>
+                                    <select [(ngModel)]="currentCandidate.Sex"  name="Sex" id="sex" class="form-control" required>
+                                        <option selected></option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female" required>Female</option>
+                                        <option value="Other" required>Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <label class="font-weight-bold" for="birthdayInput">Birthday(<i class="mandatory">*</i>)</label>
+                                    <input [(ngModel)]="currentCandidate.BirthDay"  type="date" name="BirthDay" required class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="inputPhone">Phone</label>
+                                <input [(ngModel)]="currentCandidate.PhoneNumber" pattern="(\+84|0)+[1-9]{1}[0-9]{8}" name="PhoneNumber" type="text" class="form-control" id="inputPhone" placeholder="Input Phone Number"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="inputEmail">Email</label>
+                                <input [(ngModel)]="currentCandidate.Email"  name="Email" type="Email" class="form-control" id="inputEmail" placeholder="example@gmail.com"
+                                       required>
+                            </div>
+                            <div class="form-group col-13">
+                                <label class="font-weight-bold" for="job">Job</label>
+                                <ng-select #JobSelect [items]="JobList"
+                                            bindLabel="name"
+                                            bindValue="id"
+                                            [multiple]="true"
+                                            placeholder="Select Job"
+                                            [(ngModel)]="currentCandidate.PositionApplyArray"
+                                            [ngModelOptions]="{standalone: true}"
+                                            maxSelectedItems="3">
+                                </ng-select>
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold" for="Address">Address(<i class="mandatory">*</i>)</label>
+                                <input [(ngModel)]="currentCandidate.Address"  name="Address" type="text" class="form-control" id="Address" placeholder="Address"
+                                       required>
+                            </div>
+                        </div>
+                        <div></div>
+                        <div class="form-group col-md-6">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold" for="IdentifyNumber">Identify Number(<i class="mandatory">*</i>)</label>
+                                    <input [(ngModel)]="currentCandidate.IdentifyNumber"  name="IdentifyNumber" type="text" class="form-control" id="IdentifyNumber" placeholder="Type identify number"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold" for="Skills">Skills(<i class="mandatory">*</i>)</label>
+                                    <input [(ngModel)]="currentCandidate.Skills"  name="Skills" type="text" class="form-control" id="Skills" placeholder="Skills" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold" for="Experience">Experience(<i class="mandatory">*</i>)</label>
+                                    <input required [(ngModel)]="currentCandidate.Experience"  name="Experience" type="text" class="form-control" id="inputExp">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold" for="inputUniversity">University</label>
+                                    <input [(ngModel)]="currentCandidate.University"  name="University" id="inputUniversity" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold" for="Source">Source</label>
+                                    <input [(ngModel)]="currentCandidate.Source"  name="Source" type="text" class="form-control" id="Source">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold" for="Source">Level(<i class="mandatory">*</i>)</label>
+                                    <select [(ngModel)]="currentCandidate.Level"  name="Level" id="Level" class="form-control" required>
+                                        <option selected></option>
+                                        <option *ngFor="let level of JobLevelList" value={{level.ID}}>{{level.Name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-12">
+                                    <label class="font-weight-bold" for="inputAction">Action</label>
+                                    <select id="inputAction" class="form-control">
+                                        <option selected>None</option>
+                                        <option>Interview</option>
+                                        <option>Offering</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-col">
+                                <label class="font-weight-bold" for="inputNote">Note</label>
+                                <textarea [(ngModel)]="currentCandidate.Note" name="Note" style="height:125px" type="text" rows="5" cols="45" class="form-control" id="inputNote"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <label *ngIf="!isAddForm" class="font-weight-bold" for="DeleteFlag">Delete?</label>
+                        <select [(ngModel)]="currentCandidate.DeleteFlag" *ngIf="!isAddForm"  name="DeleteFlag" id="DeleteFlag" class="form-control" required>
+                            <option value="N">No</option>
+                            <option value="Y">Yes</option>
+                        </select>
+                        <input hidden [(ngModel)]="currentCandidate.ID" name="ID" type="text" class="form-control" id="ID">
+                        <button name="btn_Submit" type="submit" class="btn btn-success">Save</button>
+                        <!-- <input type="submit" onclick="//addCandidate()" class="btn btn-success">Save</button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-loadingpage *ngIf="isProcessing"></app-loadingpage>
+
+<app-candidate-list-group-item (messageEvent)="receiveMessage($event)"></app-candidate-list-group-item>
+
+
+

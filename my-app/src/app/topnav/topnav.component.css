@@ -1,0 +1,8 @@
+@media only screen and (max-width: 1000px) {
+    .topnav #title, .topnav a, #helloLabel{
+        font-size: 15px;
+    }
+    #avatar{
+        max-height:35px;
+    }
+  }

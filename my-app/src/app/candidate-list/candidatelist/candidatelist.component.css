@@ -1,0 +1,10 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+#DeleteFlag{
+    width: 10%;
+}
+
+.mandatory{
+    color:red;
+    font-style:bold;
+}
