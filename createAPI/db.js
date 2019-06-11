@@ -6,6 +6,8 @@ var mysql = require('mysql'); // Khai báo module mysql
 
 app.use(bodyParser.json()); // Khai báo app sẽ sử dụng bodyParser chuyển data về dạng json
 
+//test ở đây nữa
+
 // Connect database
 var connection = mysql.createConnection({
     host: 'localhost',
