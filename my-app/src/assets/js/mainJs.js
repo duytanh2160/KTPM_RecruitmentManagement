@@ -21,15 +21,19 @@ function sendAjax(e, t, n) {
 
 
 function w3_toggle() {
-    if (document.getElementById("mySideBar").style.display == "block") {
-        document.getElementById("mySideBar").style.display = "none";
-        document.getElementById("mySideBar").style.transition = "opacity 1s ease-out;";
+    if (document.getElementById("mySideBar").style.marginRight == "0%") {
+        document.getElementById("mySideBar").style.transition = "opacity 0.3s ease-out;";
         document.getElementById("mySideBar").style.opacity = "0";
+		document.getElementById("mySideBar").style.marginRight = "-22%";
+		setTimeout(function(){document.getElementById("mySideBar").style.display = "none"},300);
         sessionStorage.setItem("bar","");
     } else {
         document.getElementById("mySideBar").style.display = "block";
+		setTimeout(function(){
         document.getElementById("mySideBar").style.width = "22%";
         document.getElementById("mySideBar").style.opacity = "1";
+		document.getElementById("mySideBar").style.marginRight = "0%";
+        },1);
         sessionStorage.setItem("bar","open");
     }
 }

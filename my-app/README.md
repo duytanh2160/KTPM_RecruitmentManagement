@@ -27,5 +27,11 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 
-##Passing data from child component to parent:
-https://www.themarketingtechnologist.co/building-nested-components-in-angular-2/
+## Passing data from child component to parent:
+[Click Here](https://www.themarketingtechnologist.co/building-nested-components-in-angular-2/)
+
+
+## Commit GitHub
+git add *
+git commit -m "Message"
+git push origin master

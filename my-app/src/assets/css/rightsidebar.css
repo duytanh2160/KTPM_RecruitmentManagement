@@ -178,7 +178,7 @@
   }
 
   #mySideBar{
-    display:none;
+    transition: all 0.3s;
     width:22%;
     right:0
   }

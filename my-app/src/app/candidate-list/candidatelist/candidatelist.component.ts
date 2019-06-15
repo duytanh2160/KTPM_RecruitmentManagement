@@ -78,8 +78,8 @@ export class CandidatelistComponent implements OnInit {
           result.push(temp);
         }
         this.JobList = result;
+        console.log(JSON.stringify(result));
       });
-    console.log(this.JobList);
   }
 
 
