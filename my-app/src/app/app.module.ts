@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { PagingComponent } from './paging/paging.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CandidateListModule } from './candidate-list/candidate-list.module';
+import { InterviewingListModule } from './interviewing-list/interviewing-list.module';
 
 
 
@@ -33,6 +34,7 @@ import { CandidateListModule } from './candidate-list/candidate-list.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    InterviewingListModule,
     CandidateListModule,
     NgSelectModule,
     FormsModule
