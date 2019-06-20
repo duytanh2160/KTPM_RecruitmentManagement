@@ -182,7 +182,7 @@ app.get('/candidates/search', (req, res) => {
 app.get('/candidates/apply', (req, res) => {
     let cand = req.query;
 
-    var query = "select J.Name" 
+    var query = "select J.ID as ID,J.Name as Name" 
               +" from Candidate C, Job J, PositionApply P" 
               +" Where P.CandidateID = C.ID and P.JobID = J.ID"
               +" And C.ID = " + cand.ID;
@@ -197,16 +197,7 @@ app.get('/candidates/apply', (req, res) => {
         else {
             res.header("Access-Control-Allow-Origin", "*");
 
-            var result = "";
-            for(var i = 0 ; i < rows.recordset.length ; i++){
-                result += rows.recordset[i].Name;
-                if(i < (rows.recordset.length - 1)){
-                    result += ",";
-                }
-                
-            }
-
-            res.send(JSON.stringify(result)); 
+            res.send(rows.recordset[0]); 
             res.end();
         }
     });
@@ -315,6 +306,29 @@ app.get('/candidates/count',(req,res) =>{
 });
 
 
+// Get Candidate Action
+app.get('/candidates/action', (req, res) => {
+    let cand = req.query;
+
+    var query = `select Action `
+    +           `from PositionApply `
+    +           `where CandidateID = ${cand.ID} `
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset[0]); 
+            res.end();
+        }
+    });
+});
+
+
 
 // GetJob list
 app.get('/jobs', (req, res) => {
@@ -357,26 +371,51 @@ app.get('/levels', (req, res) => {
 });
 
 //Add Candidate's Job Apply
-//params: CandididateID, JobID[]
+//params: CandididateID, JobID
 app.post('/jobs/apply/add', (req, res) => {
     let cand = req.body;
 
-    for(var i = 0; i < cand.JobID.length ; i++){
-
-        var query = `Insert into PositionApply(CandidateID,JobID)` 
-                +   `values(${cand.CandidateID},${cand.JobID[i]})`;
+    var query = `Insert into PositionApply(CandidateID,JobID,Action) ` 
+            +   `values(${cand.CandidateID},${cand.JobID},'${cand.Action}') `
+            +   `SELECT @@IDENTITY as ID`;
 
         request.query(query, (error, rows, fields) => {
             if (error) {
-                //console.log(error);
                 res.write("" + error);
                 res.write("\nQuery: " + query);
                 res.end();
             }
+            else {
+                res.header("Access-Control-Allow-Origin", "*");
+                res.send(rows.recordset[0]); 
+                res.end();
+            }
         });
-    }
-    res.send(`{"result":"Successful"}`); 
-    res.end();
+});
+
+
+
+app.post('/jobs/apply/update', (req, res) => {
+
+    let cand = req.body;
+
+    var query = `Update PositionApply `
+        +       `Set JobID = ${cand.PositionApply.ID} `
+        +       `Where CandidateID = ${cand.ID} `;
+
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
 });
 
 
@@ -387,6 +426,85 @@ app.post('/jobs/apply/deleteall', (req, res) => {
 
 
     var query = `Delete PositionApply where CandidateID = ${cand.ID}`;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+
+// Get Interviewing list
+app.get('/interviewings', (req, res) => {
+    let cand = req.query;
+
+    var query = `Select i.ID as InterviewingID, i.Result,i.Date,i.InterviewerName,i.Note,P.CandidateID,i.PositionApplyID,i.Location `
+        +       `from Interviewing i, PositionApply p, Candidate c `
+        +       `where 1 = 1 `
+        +       `And i.PositionApplyID = p.ID `
+        +       `And p.CandidateID = c.ID`;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset); 
+            res.end();
+        }
+    });
+});
+
+
+//Add new Interviewing.
+app.post('/interviewings/add', (req, res) => {
+
+    let job = req.body;
+
+
+    var query = `Insert into Interviewing(Result, Note, PositionApplyID, Date, InterviewerName, Location) `
+    +           `values('Pending','Updating...',${job.PositionApplyID},getdate(),'Updating...','Updating...') `
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+//Update Interviewing.
+app.post('/interviewings/update', (req, res) => {
+
+    let job = req.body;
+
+
+    var query = `Update Interviewing `
+    +           `Set InterviewerName = N'${job.InterviewerName}', `
+    +           `Location = N'${job.Location}', `
+    +           `Date = '${job.Date}', `
+    +           `Note = N'${job.Note}', `
+    +           `Result = '${job.Result}' `
+    +           `Where ID = ${job.InterviewingID} `
 
     request.query(query, (error, rows, fields) => {
         if (error) {

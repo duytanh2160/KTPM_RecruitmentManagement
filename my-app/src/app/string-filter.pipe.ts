@@ -40,7 +40,7 @@ export class StringFilterPipe implements PipeTransform {
 
         //filter Job if q.jobSearch != undefined
         if(q.jobSearch !== undefined && q.jobSearch !== ""){
-            value = value.filter(item => -1 < this.lowerCaseThisList(item.PositionApply.split(',')).indexOf(q.jobSearch.toLowerCase().trim()));
+            value = value.filter(item => -1 < item.PositionApply.Name.trim().toLowerCase().indexOf(q.jobSearch.toLowerCase().trim()));
         }
         
 

@@ -11,9 +11,9 @@ import { CandidatelistComponent } from './candidatelist/candidatelist.component'
 import { CandidateListSearchComponent } from './candidate-list-search/candidate-list-search.component';
 import { AddButtonSectionComponent } from './add-button-section/add-button-section.component';
 import { CandidateListGroupItemComponent } from './candidate-list-group-item/candidate-list-group-item.component';
-import { LoadingpageComponent } from '../loadingpage/loadingpage.component';
 
 import * as $ from "jquery";
+import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 
 
 

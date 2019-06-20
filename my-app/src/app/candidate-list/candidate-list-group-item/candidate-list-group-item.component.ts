@@ -45,14 +45,27 @@ export class CandidateListGroupItemComponent implements OnInit {
     if(searchStr == undefined){
       searchStr = "";
     }
-    this.apiService.searchCandidates(searchStr).subscribe((res) =>{
-
+    this.apiService.searchCandidates(searchStr,"Fullname").subscribe((res) =>{
       for(let cand of res){
         this.apiService.getPositionApply(cand.ID).subscribe((pos) => {
+          if(pos === null){
+            pos = {
+              ID : "",
+              Name : ""
+            }
+          }
           cand.PositionApply = pos;
+        });
+        this.apiService.getAction(cand.ID).subscribe((res) => {
+          if(res === null){
+            res = "";
+          }
+          cand.Action = res.Action;
         });
 
       }
+
+
       this.candidates = res;
     });
 

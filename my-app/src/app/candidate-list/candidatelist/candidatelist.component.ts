@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { NgSelectModule, NgOption, NgSelectComponent } from '@ng-select/ng-select';
 import { Job } from 'src/app/job';
 import Swal from 'sweetalert2'
+import { CandidateListGroupItemComponent } from '../candidate-list-group-item/candidate-list-group-item.component';
 
 @Component({
   selector: 'app-candidatelist',
@@ -12,6 +13,8 @@ import Swal from 'sweetalert2'
   styleUrls: ['./candidatelist.component.css']
 })
 export class CandidatelistComponent implements OnInit {
+  @ViewChild(CandidateListGroupItemComponent) CandGroup : CandidateListGroupItemComponent;
+
   JobList: any[];
   JobListDetail: Job[];
   JobLevelList: any[];
@@ -28,14 +31,17 @@ export class CandidatelistComponent implements OnInit {
     Address: "",
     Email: "",
     Image: "",
-    PositionApply: "",
-    PositionApplyArray: [],
     Experience: "",
     University: "",
     Source: "",
     Level: "",
     Note: "",
-    DeleteFlag: ""
+    DeleteFlag: "",
+    Action : "",
+    PositionApply :{
+      ID : "",
+      Name : ""
+    }
   };
 
   isAddForm: boolean;
@@ -45,6 +51,7 @@ export class CandidatelistComponent implements OnInit {
   //selectedJobIds : any;
 
   @ViewChild("JobSelect") JobSelect: NgSelectComponent;
+  @ViewChild("ActionSelect") ActionSelect: any;
   @ViewChild("f") FORM: any;
 
 
@@ -104,9 +111,8 @@ export class CandidatelistComponent implements OnInit {
   // Fired when click on "Add Button".
   onOpenAddFormClick() {
     console.log("ADD ", this.FORM.controls);
-    this.JobSelect.disabled = false;
+    this.ActionSelect.nativeElement.disabled = false;
     this.isAddForm = true;
-    //this.selectedJobIds = [];
 
     this.currentCandidate = {
       ID: "",
@@ -119,13 +125,16 @@ export class CandidatelistComponent implements OnInit {
       Address: "",
       Email: "",
       Image: "",
-      PositionApply: "",
-      PositionApplyArray: [],
       Experience: "",
       University: "",
       Source: "",
       Level: "",
-      DeleteFlag: ""
+      DeleteFlag: "",
+      Action : "",
+      PositionApply :{
+        ID : "",
+        Name : ""
+      }
     };
     $("#wizardPicturePreview").attr("src", '../../assets/images/image-select-default.png');
   }
@@ -136,10 +145,10 @@ export class CandidatelistComponent implements OnInit {
   receiveMessage($event) {
     var cand = $event;
     this.isAddForm = false;
+    this.ActionSelect.nativeElement.disabled = true;
     this.currentCandidate = JSON.parse(JSON.stringify(cand));
     this.currentCandidate.BirthDay = this.currentCandidate.BirthDay.slice(0, 10);
     this.currentCandidate.Level = this.levelNameToID(this.currentCandidate.Level);
-    this.currentCandidate.PositionApplyArray = this.jobNameToID(cand.PositionApply);
 
     this.candBeforeUpdate = JSON.parse(JSON.stringify(this.currentCandidate)); // Remember candidate info before editing it.
     $("#wizardPicturePreview").attr("src", cand.Image);
@@ -155,25 +164,6 @@ export class CandidatelistComponent implements OnInit {
       }
     }
   }
-
-  jobNameToID(jobName: string) {
-    var result = [];
-    var temp = jobName.split(',');
-
-    for (var a of temp) {
-      for (var b of this.JobListDetail) {
-        if (a == b.Name)
-          result.push(b.ID);
-      }
-    }
-
-    return result;
-  }
-
-
-
-
-
 
 
 
@@ -205,7 +195,7 @@ export class CandidatelistComponent implements OnInit {
       }
     }
 
-    if (cand.PositionApplyArray.length <= 0) {
+    if (!cand.PositionApply.ID) {
       this.showAlert("Please insert Candidate Job !", "error");
       return false;
     }
@@ -244,12 +234,14 @@ export class CandidatelistComponent implements OnInit {
    * 2. Upload candidate Avatar to Server.
    * 3. Add Candidate to database.
    * 4. Add Job Apply for candidate.
+   * 5. Using JobApply id & Candidate ID, Add new Interviewing/Probation/Offering.
   **/
 
   //Use for get Files.
   files: any[];
   onFileChangeEvent(event) {
     this.files = event.target.files[0];
+    this.currentCandidate.Image = "";
     console.log(this.files);
   }
 
@@ -265,16 +257,32 @@ export class CandidatelistComponent implements OnInit {
         cand.Image = res.path;
 
         this.apiService.addCandidate(cand).subscribe(
-          (res) => {
-            this.apiService.addJobApply({ "CandidateID": res.ID, "JobID": cand.PositionApplyArray }).subscribe(
-              (res) => {
-                if (res.result === "Successful") {
+          (res1) => {
+            this.apiService.addJobApply({"CandidateID": res1.ID,"JobID": cand.PositionApply.ID, "Action" : cand.Action}).subscribe(
+              (res2) => {
+                var JobApplyID = res2.ID;
+                //from here....will split into a function later....
+                if (cand.Action === "Interviewing") {
+                  this.apiService.addInterviewing({"PositionApplyID": JobApplyID}).subscribe(
+                    (res3) => {
+                      if (res3.result === "Successful") {
+                        this.isProcessing = false;
+                        this.showAlert("Add Completed !", "success");
+                        this.CandGroup.searchCandidates('');
+                        setTimeout(function () {
+                          $("#addCandidateForm").find(".close").click();
+                        }, 1500);
+                      }
+                    }
+                  );
+                }else{
                   this.isProcessing = false;
-                  this.showAlert("Add Completed !", "success");
+                  this.showAlert("Do Action Failed !", "error");
                   setTimeout(function () {
-                    window.location.replace('');
-                  }, 2000);
+                    $("#addCandidateForm").find(".close").click();
+                  }, 1500);
                 }
+
               });
           });
 
@@ -305,29 +313,27 @@ export class CandidatelistComponent implements OnInit {
 
     this.apiService.updateCandidate(cand).subscribe(
       (res) => {
-        if (JSON.stringify(this.candBeforeUpdate.PositionApplyArray.sort()) !== JSON.stringify(cand.PositionApplyArray.sort())) {
-          this.apiService.deleteAllJobApply(cand).subscribe(
-            (res) => {
-
-              this.apiService.addJobApply({ "CandidateID": cand.ID, "JobID": cand.PositionApplyArray }).subscribe(
-                (res) => {
-                  if (res.result === "Successful") {
-                    this.isProcessing = false;
-                    this.showAlert("Update Completed !", "success");
-                    setTimeout(function () {
-                      window.location.replace('');
-                    }, 2000);
-                  }
-                });
+        if (this.candBeforeUpdate.PositionApply.ID !== cand.PositionApply.ID) {
+          this.apiService.updateJobApply(cand).subscribe(
+            (res) =>{
+              if (res.result === "Successful") {
+                this.isProcessing = false;
+                this.showAlert("Update Completed !", "success");
+                this.CandGroup.searchCandidates('');
+                setTimeout(function(){
+                  $("#addCandidateForm").find(".close").click();
+                },1500);
+              }
             }
           );
         } else {
           if (res.result === "Successful") {
             this.isProcessing = false;
             this.showAlert("Update Completed !", "success");
-            setTimeout(function () {
-              window.location.replace('');
-            }, 2000);
+            this.CandGroup.searchCandidates('');
+            setTimeout(function(){
+              $("#addCandidateForm").find(".close").click();
+            },1500);
           }
         }
 
@@ -364,7 +370,7 @@ export class CandidatelistComponent implements OnInit {
         type: 'success',
         title: text,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1000
       });
     }
     else if (type === "error") {

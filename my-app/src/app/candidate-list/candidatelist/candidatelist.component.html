@@ -22,7 +22,7 @@
                     <div class="picture">
                         <img src="../../assets/images/image-select-default.png"
                              class="picture-src" id="wizardPicturePreview" title="">
-                        <input  (change)="onFileChangeEvent($event)" formenctype="multipart/form-data" [(ngModel)]="currentCandidate.Image" name="Image" type="file" accept="image/*" id="wizard-picture" class="">
+                        <input  (change)="onFileChangeEvent($event)" formenctype="multipart/form-data" name="Image" type="file" accept="image/*" id="wizard-picture">
                     </div>
                     <h6 *ngIf="isAddForm" style="margin-top: 20px;" class="">Choose Picture</h6>
 
@@ -67,11 +67,10 @@
                                 <ng-select #JobSelect [items]="JobList"
                                             bindLabel="name"
                                             bindValue="id"
-                                            [multiple]="true"
                                             placeholder="Select Job"
-                                            [(ngModel)]="currentCandidate.PositionApplyArray"
+                                            [(ngModel)]="currentCandidate.PositionApply.ID"
                                             [ngModelOptions]="{standalone: true}"
-                                            maxSelectedItems="3">
+                                            maxSelectedItems="1">
                                 </ng-select>
                             </div>
                             <div class="form-group">
@@ -120,10 +119,11 @@
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     <label class="font-weight-bold" for="inputAction">Action</label>
-                                    <select id="inputAction" class="form-control">
-                                        <option selected>None</option>
-                                        <option>Interview</option>
-                                        <option>Offering</option>
+                                    <select #ActionSelect [(ngModel)]="currentCandidate.Action" name="Action" required id="Action" class="form-control">
+                                        <option value="">None</option>
+                                        <option value="Interviewing">Interviewing</option>
+                                        <option value="Offering">Offering</option>
+                                        <option value="Probation">Probation</option>
                                     </select>
                                 </div>
                             </div>

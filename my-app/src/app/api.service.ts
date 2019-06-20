@@ -35,8 +35,8 @@ export class ApiService {
 
 
 
-  public searchCandidates(searchStr : string){
-    return this.httpClient.get<Candidate[]>(`${this.apiURL}/candidates/search?searchStr=${searchStr}`);
+  public searchCandidates(searchStr : string,searchCol : string){
+    return this.httpClient.get<Candidate[]>(`${this.apiURL}/candidates/search?searchStr=${searchStr}&searchCol=${searchCol}`);
   }
 
 
@@ -53,8 +53,11 @@ export class ApiService {
   }
 
 
-  public getPositionApply(ID : string){
-    return this.httpClient.get<string>(`${this.apiURL}/candidates/apply?ID=${ID}`);
+  public getPositionApply(ID : any){
+    return this.httpClient.get<any>(`${this.apiURL}/candidates/apply?ID=${ID}`);
+  }
+  public getAction(ID : string){
+    return this.httpClient.get<any>(`${this.apiURL}/candidates/action?ID=${ID}`);
   }
 
   //headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
@@ -73,8 +76,21 @@ export class ApiService {
   public addJobApply(cand : any) : Observable<any>{
     return this.httpClient.post<any>(`${this.apiURL}/jobs/apply/add`,cand);
   }
+  public updateJobApply(cand : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/jobs/apply/update`,cand);
+  }
   public deleteAllJobApply(cand : any) : Observable<any>{
     return this.httpClient.post<any>(`${this.apiURL}/jobs/apply/deleteall`,cand);
+  }
+
+  public getInterviewings(){
+    return this.httpClient.get<any>(`${this.apiURL}/interviewings`);
+  }
+  public addInterviewing(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/interviewings/add`,obj);
+  }
+  public updateInterviewing(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/interviewings/update`,obj);
   }
 
   

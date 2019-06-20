@@ -9,12 +9,15 @@ export class Candidate {
     Address : string;
     Email : string;
     Image : string;
-    PositionApply : string;
-    PositionApplyArray : Array<number>;
+    PositionApply : {
+        ID : number,
+        Name : string;
+    }
     Skills : string;
     Experience : string;
     University : string;
     Source : string;
     Level : string;
     Note : string;
+    Action: string;
 }

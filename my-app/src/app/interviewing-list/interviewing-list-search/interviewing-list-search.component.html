@@ -1,0 +1,21 @@
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-10" style="padding-right:0;">
+      <form>
+          <input [(ngModel)]="search" name="search" (ngModelChange)="onSearchSubmit({searchVal : search, jobSearch : job, deleteFlag : DeleteFlag})" required ngModel id="searchBar" type="text" placeholder="Search..">
+      </form>
+  </div>
+  <div class="col-sm-2" style="padding-left:0;">
+      <button onclick="w3_toggle()" class="btn btn-primary infoButton" style="margin-left:10px;">
+          <i class="fa fa-info" aria-hidden="true"></i>
+      </button>
+      <button class="btn btn-primary" style="float:right;width:100px;height:52px;"
+              data-toggle="modal" data-target="#advSearchCand">Filter</button>
+  </div>
+</div>
+
+
+
+<!-- The AdvSearch Modal -->
+
+
+

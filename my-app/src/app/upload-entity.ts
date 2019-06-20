@@ -7,4 +7,4 @@ export class UploadEntity {
     path : string;
     size : number;
     destination : string;
-}
+}//ko dùng nữa.
