@@ -1,9 +1,6 @@
 <title>Interviewing List</title>
 <div class="row" style="margin-top: 80px;">
     <div class="col-sm-12">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#addCandidateForm"
-            style="float:right;width:162px;height:52px;" (click)="onOpenAddFormClick()"
-            onclick="openCandidateForm()">Add</button>
     </div>
 </div>
 
@@ -11,7 +8,7 @@
 <!--EDIT INTERVIEWING-->
 <div class="modal fade" id="editInterviewingForm" tabindex="-1" role="dialog" aria-labelledby="editInterviewingForm"
         aria-hidden="true">
-    <form #f="ngForm" id="EditForm" ngNativeValidate name="EditForm" (ngSubmit)="onUpdateSubmit(currentInterviewing)">
+    <form #f="ngForm" id="EditForm" ngNativeValidate name="EditForm" (ngSubmit)="onSubmit(currentInterviewing)">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -35,7 +32,7 @@
                         <div class="row">
                             <div class="col-sm-8">
                                 <label style="padding-right: 15px;">Result:</label>
-                                <select [(ngModel)]="currentInterviewing.Result" class="result-dropdown"
+                                <select [(ngModel)]="currentInterviewing.Result" (change)="onResultChange($event)" class="result-dropdown"
                                     name="dropdownInterview">
                                     <option value="Pending">Pending</option>
                                     <option value="Fail">Fail</option>
@@ -60,7 +57,7 @@
                                 aria-labelledby="round-tab">
                                 <label>Interviewer: </label>
                                 <input name="InterviewerName" [(ngModel)]="currentInterviewing.InterviewerName"
-                                    class="form-control" type="text">
+                                    class="form-control" type="text" required>
 
                                 <label>Location: </label>
                                 <input [(ngModel)]="currentInterviewing.Location" class="form-control" type="text"
@@ -69,7 +66,7 @@
                                 <div id="datetimepicker2" class="input-append">
                                     <label>Date: </label>
                                     <input [(ngModel)]="currentInterviewing.Date" class="form-control"
-                                        type="datetime-local" id="example-datetime-local-input" name="Date">
+                                        type="datetime-local" id="example-datetime-local-input" name="Date" required>
                                 </div>
 
                                 <label>Note: </label>
@@ -85,19 +82,19 @@
                         style="border-top: 1px solid rgba(0, 0, 0, 0.2);">
 
                         <label>Current Salary: </label>
-                        <input type="text" class="form-control" name="CurrentSalary" value="" placeholder="Enter salary"
+                        <input [(ngModel)]="currentInterviewing.CurrentSalary" type="text" class="form-control" name="CurrentSalary" value="" placeholder="Enter salary"
                             required="">
 
                         <label>Expect Salary: </label>
-                        <input type="text" class="form-control" name="ExpectSalary" value="" placeholder="Enter salary"
+                        <input [(ngModel)]="currentInterviewing.ExpectSalary" type="text" class="form-control" name="ExpectSalary" value="" placeholder="Enter salary"
                             required="">
 
                         <label>Offering Salary: </label>
-                        <input type="text" class="form-control" name="OfferingSalary" value="" placeholder="Enter salary"
+                        <input [(ngModel)]="currentInterviewing.OfferingSalary" type="text" class="form-control" name="OfferingSalary" value="" placeholder="Enter salary"
                             required="">
 
-                        <label>Level Applied: </label>
-                        <input type="text" class="form-control" name="LevelApplied" value="" placeholder="Enter text"
+                        <label>Level Offered: </label>
+                        <input [(ngModel)]="currentInterviewing.LevelOffered" type="text" class="form-control" name="LevelOffered" value="" placeholder="Enter text"
                             required="">
 
                     </div>

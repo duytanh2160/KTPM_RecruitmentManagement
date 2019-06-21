@@ -93,5 +93,16 @@ export class ApiService {
     return this.httpClient.post<any>(`${this.apiURL}/interviewings/update`,obj);
   }
 
+
+  public getOfferrings(){
+    return this.httpClient.get<any>(`${this.apiURL}/offerings`);
+  }
+  public addOffering(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/offerings/add`,obj);
+  }
+  public updateOffering(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/offerings/update`,obj);
+  }
+
   
 }

@@ -15,6 +15,13 @@ export class CandidateListSearchComponent implements OnInit {
   JobLevelList : any[];
   JobList : any[];
 
+
+
+  //NgModel define:
+  DeleteFlag : any = "N";
+  job : any = "";
+  Level : any = "";
+
   constructor(private apiService : ApiService) {
     this.getJobLevelsList();
     this.getJobList();
@@ -36,7 +43,6 @@ export class CandidateListSearchComponent implements OnInit {
     });
     console.log(this.JobLevelList); 
   }
-
   getJobList(){
     this.apiService.getJobs().subscribe(
       res =>{

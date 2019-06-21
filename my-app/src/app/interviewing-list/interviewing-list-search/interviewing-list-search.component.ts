@@ -9,8 +9,13 @@ import { ApiService } from '../../api.service';
 })
 export class InterviewingListSearchComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<Search>();
+  JobLevelList : any[];
+  JobList : any[];
 
-  constructor(private apiService : ApiService) { }
+  constructor(private apiService : ApiService) {
+    this.getJobLevelsList();
+    this.getJobList();
+   }
 
   ngOnInit() {
   }
@@ -23,4 +28,23 @@ export class InterviewingListSearchComponent implements OnInit {
   onSearchSubmit(search : Search) : void { 
     this.messageEvent.emit(search);
   }
+
+
+
+    //Get JobLevel List
+    getJobLevelsList(){
+      this.apiService.getJobLevels().subscribe(
+        res =>{
+          this.JobLevelList = res;
+      });
+      console.log(this.JobLevelList); 
+    }
+    getJobList(){
+      this.apiService.getJobs().subscribe(
+        res =>{
+          this.JobList = res;
+      });
+      console.log(this.JobList); 
+    }
+  
 }

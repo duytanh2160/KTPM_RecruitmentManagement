@@ -402,6 +402,13 @@ app.post('/jobs/apply/update', (req, res) => {
     var query = `Update PositionApply `
         +       `Set JobID = ${cand.PositionApply.ID} `
         +       `Where CandidateID = ${cand.ID} `;
+    
+    if(cand.Action){
+        query = `Update PositionApply `
+        +       `Set JobID = ${cand.PositionApply.ID}, `
+        +       `Action = '${cand.Action}' `
+        +       `Where CandidateID = ${cand.ID} `;
+    }
 
 
     request.query(query, (error, rows, fields) => {
@@ -448,7 +455,7 @@ app.post('/jobs/apply/deleteall', (req, res) => {
 app.get('/interviewings', (req, res) => {
     let cand = req.query;
 
-    var query = `Select i.ID as InterviewingID, i.Result,i.Date,i.InterviewerName,i.Note,P.CandidateID,i.PositionApplyID,i.Location `
+    var query = `Select i.ID as InterviewingID, i.Result,i.Date,i.InterviewerName,i.Note,P.CandidateID,i.PositionApplyID,i.Location,i.DeleteFlag `
         +       `from Interviewing i, PositionApply p, Candidate c `
         +       `where 1 = 1 `
         +       `And i.PositionApplyID = p.ID `
@@ -503,8 +510,63 @@ app.post('/interviewings/update', (req, res) => {
     +           `Location = N'${job.Location}', `
     +           `Date = '${job.Date}', `
     +           `Note = N'${job.Note}', `
+    +           `DeleteFlag = '${job.DeleteFlag}', `
     +           `Result = '${job.Result}' `
     +           `Where ID = ${job.InterviewingID} `
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+
+
+
+
+// Get Interviewing list
+app.get('/offerings', (req, res) => {
+    let cand = req.query;
+
+    var query = `Select o.ID as OfferingID,o.CurrentSalary,o.ExpectSalary,o.OfferingSalary,o.LevelOffered,o.Result,o.Note,P.CandidateID,o.PositionApplyID,o.DeleteFlag ` 
+    +           `From Offering o, PositionApply p, Candidate c `
+    +           `Where 1 = 1 `
+    +           `And o.PositionApplyID = p.ID `
+    +           `And p.CandidateID = c.ID `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset); 
+            res.end();
+        }
+    });
+});
+
+
+//Add new Offering.
+app.post('/offerings/add', (req, res) => {
+
+    let job = req.body;
+
+
+    var query = `Insert into Offering(PositionApplyID,CurrentSalary,ExpectSalary,OfferingSalary,LevelOffered,Result,Note,DeleteFlag) `
+    +           `Values(${job.PositionApplyID},${job.CurrentSalary},${job.ExpectSalary},${job.OfferingSalary},N'${job.LevelOffered}',N'Pending',N' ','N') `;
 
     request.query(query, (error, rows, fields) => {
         if (error) {

@@ -5,60 +5,63 @@
 
 
 <div class="list-group" style="margin-top:10px">
-<div class="list-group-item" *ngFor="let cand of candidates | stringFilter : search | paginate: { itemsPerPage: 4, currentPage: p }"> 
-  <div *ngIf="cand.PositionApply !== undefined" class="row">
-    <div class="col-sm-2">
-      <a href="candidates/info/{{cand.ID}}">
-        <div class="profile-img">
-          <img src="{{cand.Image}}" onerror="this.onerror=null;this.src='../../assets/images/default/avatar.png'" alt="">
-        </div>
-      </a>
-    </div>
-    <div class="col-sm-10">
-      <div class="row">
-        <div class="col-sm-7">
-          <h2 class="profile-name"><span>ID : {{cand.ID}}  - {{cand.Fullname}}</span></h2>
-        </div>
-        <div class="col-sm-5 d-flex justify-content-between align-items-center">
-          <div class="info" style="margin-top: 15px"><span>Gender: </span>{{cand.Sex}}</div>
-          <input type="checkbox" class="ckb-export">
-        </div>
+  <div class="list-group-item"
+    *ngFor="let cand of candidates | stringFilter : search | paginate: { itemsPerPage: 4, currentPage: p }">
+    <div *ngIf="cand.PositionApply !== undefined" class="row">
+      <div class="col-sm-2">
+        <a href="candidates/info/{{cand.ID}}">
+          <div class="profile-img">
+            <img src="{{cand.Image}}" onerror="this.onerror=null;this.src='../../assets/images/default/avatar.png'"
+              alt="">
+          </div>
+        </a>
       </div>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="info">
-            <div><span>Job:</span> {{cand.PositionApply.Name}}</div>
-            <div><span>Level: </span> {{cand.Level}}</div>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-sm-7">
+            <h2 class="profile-name"><span>ID : {{cand.ID}} - {{cand.Fullname}}</span></h2>
+          </div>
+          <div class="col-sm-5 d-flex justify-content-between align-items-center">
+            <div class="info" style="margin-top: 15px"><span>Gender: </span>{{cand.Sex}}</div>
+            <input type="checkbox" class="ckb-export">
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="info">
-            <div><span>Skills:</span> {{cand.Skills}}</div>
-            <div><span>Exp. :</span> {{cand.Experience}}</div>
-            <div><span>University: </span> {{cand.University}}</div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="info">
-            <div><span>Source:</span> {{cand.Source}}</div>
-            <div style="display: inline-block"><span>Email: </span> {{cand.Email}}
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="info">
+              <div><span>Job:</span> {{cand.PositionApply.Name}}</div>
+              <div><span>Level: </span> {{cand.Level}}</div>
             </div>
           </div>
-        </div>
-        <div class="col-sm-2">
-          <div class="info">
-            <div><span>Action:</span> {{cand.Action}}</div>
-            <div><span>Result:</span> Fail</div>
+          <div class="col-sm-4">
+            <div class="info">
+              <div><span>Skills:</span> {{cand.Skills}}</div>
+              <div><span>Exp. :</span> {{cand.Experience}}</div>
+              <div><span>University: </span> {{cand.University}}</div>
+            </div>
           </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="action">
-            <button class="btn btn-secondary" data-toggle="modal" data-target="#addCandidateForm" (click)="insertDataToForm(cand)"><a class="fa fa-pencil"></a></button>
+          <div class="col-sm-3">
+            <div class="info">
+              <div><span>Source:</span> {{cand.Source}}</div>
+              <div style="display: inline-block"><span>Email: </span> {{cand.Email}}
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="info">
+              <div><span>Action:</span> {{cand.Action}}</div>
+              <div><span>Result:</span> Fail</div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="action">
+              <button class="btn btn-secondary" data-toggle="modal" data-target="#addCandidateForm"
+                (click)="insertDataToForm(cand)"><a class="fa fa-pencil"></a></button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<pagination-controls class="my-pagination text-center" (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls class="my-pagination text-center" (pageChange)="p = $event"></pagination-controls>
 </div>

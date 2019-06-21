@@ -260,29 +260,7 @@ export class CandidatelistComponent implements OnInit {
           (res1) => {
             this.apiService.addJobApply({"CandidateID": res1.ID,"JobID": cand.PositionApply.ID, "Action" : cand.Action}).subscribe(
               (res2) => {
-                var JobApplyID = res2.ID;
-                //from here....will split into a function later....
-                if (cand.Action === "Interviewing") {
-                  this.apiService.addInterviewing({"PositionApplyID": JobApplyID}).subscribe(
-                    (res3) => {
-                      if (res3.result === "Successful") {
-                        this.isProcessing = false;
-                        this.showAlert("Add Completed !", "success");
-                        this.CandGroup.searchCandidates('');
-                        setTimeout(function () {
-                          $("#addCandidateForm").find(".close").click();
-                        }, 1500);
-                      }
-                    }
-                  );
-                }else{
-                  this.isProcessing = false;
-                  this.showAlert("Do Action Failed !", "error");
-                  setTimeout(function () {
-                    $("#addCandidateForm").find(".close").click();
-                  }, 1500);
-                }
-
+                this.doCandidateAction(res2,cand);
               });
           });
 
@@ -292,6 +270,63 @@ export class CandidatelistComponent implements OnInit {
         this.showAlert("Error a: " + err, "error");
       });
   }
+
+
+
+  doCandidateAction(res2,cand){
+    var JobApplyID = res2.ID;
+    if (cand.Action === "Interviewing") {
+      this.apiService.addInterviewing({"PositionApplyID": JobApplyID}).subscribe(
+        (res3) => {
+          if (res3.result === "Successful") {
+            this.isProcessing = false;
+            this.showAlert("Add Completed !", "success");
+            this.CandGroup.searchCandidates('');
+            setTimeout(function () {
+              $("#addCandidateForm").find(".close").click();
+            }, 1500);
+          }
+        }
+      );
+    }
+    else if(cand.Action === "Offering"){
+      this.apiService.addOffering({
+        "PositionApplyID": JobApplyID,
+        "LevelOffered"  : '',
+        "CurrentSalary" : 0,
+        "ExpectSalary" : 0,
+        "OfferingSalary" : 0
+      }).subscribe(
+        (res4) =>{
+          if (res4.result === "Successful") {
+            this.isProcessing = false;
+            this.showAlert("Add Completed !", "success");
+            this.CandGroup.searchCandidates('');
+            setTimeout(function () {
+              $("#addCandidateForm").find(".close").click();
+            }, 1500);
+          }
+
+
+        }
+      );
+    }
+    else{
+      this.isProcessing = false;
+      this.showAlert("Do Action Failed !", "error");
+      setTimeout(function () {
+        $("#addCandidateForm").find(".close").click();
+      }, 1500);
+    }
+  }
+
+
+
+
+
+
+
+
 
   //===============End Add Process====================
 

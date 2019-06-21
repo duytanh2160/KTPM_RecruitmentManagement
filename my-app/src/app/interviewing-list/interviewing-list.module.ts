@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { StringFilterPipe } from './string-filter.pipe';
 
 @NgModule({
   declarations: [
     InterviewinglistComponent,
     LoadingpageComponent,
     InterviewingListSearchComponent,
-    InterviewingListGroupItemComponent
+    InterviewingListGroupItemComponent,
+    StringFilterPipe
   ],
   imports: [
     CommonModule,

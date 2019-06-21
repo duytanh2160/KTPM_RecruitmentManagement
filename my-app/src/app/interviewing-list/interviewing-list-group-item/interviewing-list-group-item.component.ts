@@ -9,7 +9,9 @@ import { ApiService } from 'src/app/api.service';
 export class InterviewingListGroupItemComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<any>();
   InterviewingList : any[];
+  public search : any;
   isLoadCompleted : boolean = false;
+  
 
   constructor(private apiService : ApiService) {
     this.getInterviewingList();
@@ -36,6 +38,9 @@ export class InterviewingListGroupItemComponent implements OnInit {
               });
             }
           );
+
+
+          itv.Date = itv.Date.substr(0,16).replace("T"," ");
         }
 
 
@@ -51,6 +56,17 @@ export class InterviewingListGroupItemComponent implements OnInit {
   //Send data to Edit Form.
   sendDataToForm(interviewing : any){
     this.messageEvent.emit(interviewing);
+  }
+
+
+
+  receiveMessage($event){
+    this.search = $event;
+  }
+
+
+  test(a){
+    console.log(a);
   }
 
 

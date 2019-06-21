@@ -9,13 +9,51 @@
           <i class="fa fa-info" aria-hidden="true"></i>
       </button>
       <button class="btn btn-primary" style="float:right;width:100px;height:52px;"
-              data-toggle="modal" data-target="#advSearchCand">Filter</button>
+              data-toggle="modal" data-target="#advSearchItv">Filter</button>
   </div>
 </div>
 
 
 
 <!-- The AdvSearch Modal -->
+<div class="modal fade" id="advSearchItv">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Advance Search</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <label class="font-weight-bold" for="job">Job</label>
+                <select [(ngModel)]="job" name="job" class="form-control" id="job">
+                    <option selected value="">All</option>
+                    <option *ngFor="let job of JobList" value={{job.Name}}>{{job.Name}}</option>
+                </select>
+                <label class="font-weight-bold" for="level">Level</label>
+                <select [(ngModel)]="Level" class="form-control" id="Level">
+                    <option value="">All</option>
+                    <option *ngFor="let level of JobLevelList" value={{level.Name}}>{{level.Name}}</option>
+                </select>
+                <label class="font-weight-bold" for="result">Result</label>
+                <select [(ngModel)]="ResultSearch" class="form-control" id="result">
+                    <option value="">All</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Fail">Fail</option>
+                    <option value="Pass">Pass</option>
+                </select>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onSearchSubmit({searchVal : search, jobSearch : job, levelSearch : Level , resultSearch : ResultSearch})">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

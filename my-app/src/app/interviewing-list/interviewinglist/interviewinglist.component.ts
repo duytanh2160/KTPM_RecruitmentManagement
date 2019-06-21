@@ -13,6 +13,7 @@ export class InterviewinglistComponent implements OnInit {
 
   isProcessing : boolean = false;
   isOffering : boolean = false;
+  itvBeforeUpdate : any;
   currentInterviewing : any ={
     Result : "",
     InterviewerName : "",
@@ -28,45 +29,15 @@ export class InterviewinglistComponent implements OnInit {
 
   ngOnInit() {
   }
-
-
-
-
-
-
-
+  
   receiveMessage($event){
     this.isOffering = false;
     console.log("Edit Form: ",$event);
 
     this.currentInterviewing = JSON.parse(JSON.stringify($event));
-    this.currentInterviewing.Date = this.currentInterviewing.Date.substring(0,16);
+    this.currentInterviewing.Date = this.currentInterviewing.Date.replace(" ","T");
+    this.itvBeforeUpdate = JSON.parse(JSON.stringify(this.currentInterviewing));
   }
-
-
-
-  onUpdateSubmit(itv : any){
-    console.log(itv);
-    itv.Date = itv.Date.replace("T"," ");
-    this.apiService.updateInterviewing(itv).subscribe(
-      (res) =>{
-        if (res.result === "Successful") {
-          this.isProcessing = false;
-          this.showAlert("Update Completed !", "success");
-          this.itvGroup.getInterviewingList();
-          setTimeout(function(){
-            $("#editInterviewingForm").find(".close").click();
-          },1500);
-        }
-      }
-    );
-  }
-
-
-
-
-
-
   showAlert(text, type) {
     if (type === "success") {
       Swal.fire({
@@ -85,6 +56,66 @@ export class InterviewinglistComponent implements OnInit {
         showConfirmButton: true,
       });
     }
+  }
+
+  onResultChange($event){
+    if($event.srcElement.value !== "Pass"){
+      this.isOffering = false;
+    }
+  }
+
+
+
+
+  onSubmit(itv: any) {
+    if (this.validateForm(itv)) {
+      this.onUpdateSubmit(itv);
+    }
+  }
+
+
+  validateForm(itv : any){
+    if (JSON.stringify(this.itvBeforeUpdate) === JSON.stringify(itv)) {
+      this.showAlert("There's nothing change !", "error");
+      return false;
+    }
+
+
+    return true;
+  }
+
+
+
+  onUpdateSubmit(itv : any){
+    console.log(itv);
+    itv.Date = itv.Date.replace("T"," ");
+    this.isProcessing = true;
+
+
+    if(this.isOffering){
+      itv.DeleteFlag = "Y";
+      this.apiService.addOffering(itv).subscribe();
+      this.apiService.updateJobApply({
+        "PositionApply" : itv.Candidate.PositionApply,
+        "ID" : itv.Candidate.ID,
+        "Action" : "Offering"
+      }).subscribe();
+
+    }
+
+    this.apiService.updateInterviewing(itv).subscribe(
+      (res) =>{
+        if (res.result === "Successful") {
+          this.isProcessing = false;
+          this.showAlert("Update Completed !", "success");
+          this.itvGroup.getInterviewingList();
+          setTimeout(function(){
+            $("#editInterviewingForm").find(".close").click();
+          },1500);
+        }
+      }
+    );
+
   }
       
 
