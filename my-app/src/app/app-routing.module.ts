@@ -9,10 +9,10 @@ import { OfferinglistComponent } from './offering-list/offeringlist/offeringlist
 import { ProbationlistComponent } from './probation-list/probationlist/probationlist.component';
 
 const routes : Routes = [
-  { path : '', component : CandidatelistComponent },
-  { path : 'Interviewing', component : InterviewinglistComponent },
-  { path : 'Offering', component : OfferinglistComponent },
-  { path : 'Probation', component : ProbationlistComponent },
+  { path : '', component : CandidatelistComponent, data: {title: 'Candidate List'} },
+  { path : 'Interviewing', component : InterviewinglistComponent, data: {title: 'Interviewing List'} },
+  { path : 'Offering', component : OfferinglistComponent, data: {title: 'Offering List'} },
+  { path : 'Probation', component : ProbationlistComponent, data: {title: 'Probation List'} },
   { path : 'dev', component : HelloworldComponent }
 ];
 
