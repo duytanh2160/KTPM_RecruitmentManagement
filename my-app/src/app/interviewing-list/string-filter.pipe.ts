@@ -21,6 +21,16 @@ export class StringFilterPipe implements PipeTransform {
     }
 
 
+
+    //filter DeleteFlag
+    if (q.deleteFlag !== undefined) {
+      value = value.filter(item => -1 < item.DeleteFlag.toLowerCase().indexOf(q.deleteFlag.toLowerCase().trim()));
+    } else {
+      value = value.filter(item => -1 < item.DeleteFlag.toLowerCase().indexOf('n'));
+    } 
+  
+
+
       //filter Result
       if (q.resultSearch !== undefined && q.resultSearch !== "") {
           value = value.filter(item => item.Result === q.resultSearch);

@@ -104,5 +104,11 @@ export class ApiService {
     return this.httpClient.post<any>(`${this.apiURL}/offerings/update`,obj);
   }
 
+
+  public addProbation(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/probations/add`,obj);
+  }
+
+
   
 }

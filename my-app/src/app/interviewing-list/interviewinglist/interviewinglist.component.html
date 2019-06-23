@@ -31,7 +31,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-8">
-                                <label style="padding-right: 15px;">Result:</label>
+                                <label class="font-weight-bold" style="padding-right: 15px;">Result:</label>
                                 <select [(ngModel)]="currentInterviewing.Result" (change)="onResultChange($event)" class="result-dropdown"
                                     name="dropdownInterview">
                                     <option value="Pending">Pending</option>
@@ -40,7 +40,7 @@
                                 </select>
                             </div>
                             <div class="col-sm-4" [hidden]="currentInterviewing.Result !== 'Pass'">
-                                <label style="padding-right: 15px;">Offering:</label>
+                                <label class="font-weight-bold" style="padding-right: 15px;">Offering:</label>
                                 <input [(ngModel)]="isOffering" id="checkedBox" type="checkbox" name="isOffering" value="isChecked"
                                     >
                             </div>
@@ -49,30 +49,30 @@
 
                     <!--Interview Round-View-->
 
-                    <div [hidden]="isOffering" class="card-body" id="myCard" style="display:block; border-top: 1px solid rgba(0, 0, 0, 0.2);">
-
+                    <div [hidden]="isOffering" class="card-body" id="myCard"
+                        style="display:block; border-top: 1px solid rgba(0, 0, 0, 0.2);">
+                    
                         <!--Interview Round-->
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="round1" role="tabpanel"
-                                aria-labelledby="round-tab">
-                                <label>Interviewer: </label>
-                                <input name="InterviewerName" [(ngModel)]="currentInterviewing.InterviewerName"
-                                    class="form-control" type="text" required>
-
-                                <label>Location: </label>
-                                <input [(ngModel)]="currentInterviewing.Location" class="form-control" type="text"
-                                    name="Location" value="" placeholder="Enter text" required="">
-
+                            <div class="tab-pane fade show active" id="round1" role="tabpanel" aria-labelledby="round-tab">
+                                <label class="font-weight-bold">Interviewer: </label>
+                                <input name="InterviewerName" [(ngModel)]="currentInterviewing.InterviewerName" class="form-control"
+                                    type="text" required>
+                    
+                                <label class="font-weight-bold">Location: </label>
+                                <input [(ngModel)]="currentInterviewing.Location" class="form-control" type="text" name="Location" value=""
+                                    placeholder="Enter text" required="">
+                    
                                 <div id="datetimepicker2" class="input-append">
-                                    <label>Date: </label>
-                                    <input [(ngModel)]="currentInterviewing.Date" class="form-control"
-                                        type="datetime-local" id="example-datetime-local-input" name="Date" required>
+                                    <label class="font-weight-bold">Date: </label>
+                                    <input [(ngModel)]="currentInterviewing.Date" class="form-control" type="datetime-local"
+                                        id="example-datetime-local-input" name="Date" required>
                                 </div>
-
-                                <label>Note: </label>
-                                <textarea [(ngModel)]="currentInterviewing.Note" class="form-control" name="Note"
-                                    rows="5" cols="45" placeholder="Note for each round..."></textarea>
-
+                    
+                                <label class="font-weight-bold">Note: </label>
+                                <textarea [(ngModel)]="currentInterviewing.Note" class="form-control" name="Note" rows="5" cols="45"
+                                    placeholder="Note for each round..."></textarea>
+                    
                             </div>
                         </div>
                     </div>
@@ -81,21 +81,22 @@
                     <div *ngIf="isOffering"  class="card-body" id="offeringCheck"
                         style="border-top: 1px solid rgba(0, 0, 0, 0.2);">
 
-                        <label>Current Salary: </label>
-                        <input [(ngModel)]="currentInterviewing.CurrentSalary" type="text" class="form-control" name="CurrentSalary" value="" placeholder="Enter salary"
+                        <label class="font-weight-bold">Current Salary: </label>
+                        <input [(ngModel)]="currentInterviewing.CurrentSalary" type="number" min="0" class="form-control" name="CurrentSalary" value="" placeholder="Enter salary"
                             required="">
 
-                        <label>Expect Salary: </label>
-                        <input [(ngModel)]="currentInterviewing.ExpectSalary" type="text" class="form-control" name="ExpectSalary" value="" placeholder="Enter salary"
+                        <label class="font-weight-bold">Expect Salary: </label>
+                        <input [(ngModel)]="currentInterviewing.ExpectSalary" type="number" min="0" class="form-control" name="ExpectSalary" value="" placeholder="Enter salary"
                             required="">
 
-                        <label>Offering Salary: </label>
-                        <input [(ngModel)]="currentInterviewing.OfferingSalary" type="text" class="form-control" name="OfferingSalary" value="" placeholder="Enter salary"
+                        <label class="font-weight-bold">Offering Salary: </label>
+                        <input [(ngModel)]="currentInterviewing.OfferingSalary" type="number" min="0" class="form-control" name="OfferingSalary" value="" placeholder="Enter salary"
                             required="">
 
-                        <label>Level Offered: </label>
-                        <input [(ngModel)]="currentInterviewing.LevelOffered" type="text" class="form-control" name="LevelOffered" value="" placeholder="Enter text"
-                            required="">
+                        <label class="font-weight-bold">Level Offered: </label>
+                        <select [(ngModel)]="currentInterviewing.LevelOffered"  name="LevelOffered" id="LevelOffered" placeholder="Select Level" class="form-control" required>
+                            <option *ngFor="let level of JobLevelList" value={{level.Name}}>{{level.Name}}</option>
+                        </select>
 
                     </div>
 

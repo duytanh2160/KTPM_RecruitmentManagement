@@ -1,0 +1,60 @@
+<!-- Search -->
+<app-offering-list-search (messageEvent)="receiveMessage($event)"></app-offering-list-search>
+
+<div class="list-group" style="margin-top:10px">
+    <div class="list-group-item" *ngFor="let off of OfferingList | stringFilter : search | paginate: { itemsPerPage: 4, currentPage: p }">
+        <div class="row">
+            <div class="col-sm-2">
+                <a href="javascript:alert('Gắn link info vào đây');">
+                    <div class="profile-img">
+                        <img src="{{off.Candidate.Image}}" alt="">
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="checkbox" class="ckb-export">
+                        <h2 class="profile-name"><span>ID : {{off.Candidate.ID}} - {{off.Candidate.Fullname}}</span></h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="info">
+                                <div><span>Job:</span> {{off.Candidate.PositionApply.Name}}</div>
+                            <div><span>Level Applied: </span> {{off.Candidate.Level}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="info">
+                            <div><span>Curent Salary:</span> {{off.CurrentSalary}}</div>
+                            <div><span>Expected Salary:</span> {{off.ExpectSalary}}</div>
+                            <div><span>Offering Salary:</span> {{off.OfferingSalary}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="info">
+                                <div><span>Final Salary:</span> 8.000.000 vnd </div>
+                                <div><span>Level Offered:</span> {{off.LevelOffered}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="info">
+
+                            <div><span>Result:</span> {{off.Result}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="action">
+                            <button (click)="sendDataToForm(off)" class="btn btn-secondary" data-toggle="modal"
+                                data-target="#editOfferingForm">
+                                <i class="fa fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <pagination-controls class="my-pagination text-center" (pageChange)="p = $event"></pagination-controls>
+</div>

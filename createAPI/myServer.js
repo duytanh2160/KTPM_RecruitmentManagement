@@ -482,8 +482,8 @@ app.post('/interviewings/add', (req, res) => {
     let job = req.body;
 
 
-    var query = `Insert into Interviewing(Result, Note, PositionApplyID, Date, InterviewerName, Location) `
-    +           `values('Pending','Updating...',${job.PositionApplyID},getdate(),'Updating...','Updating...') `
+    var query = `Insert into Interviewing(Result, Note, PositionApplyID, Date, InterviewerName, Location,DeleteFlag) `
+    +           `values('Pending','Updating...',${job.PositionApplyID},getdate(),'Updating...','Updating...','N') `
 
     request.query(query, (error, rows, fields) => {
         if (error) {
@@ -534,7 +534,7 @@ app.post('/interviewings/update', (req, res) => {
 
 
 
-// Get Interviewing list
+// Get Offerings list
 app.get('/offerings', (req, res) => {
     let cand = req.query;
 
@@ -567,6 +567,92 @@ app.post('/offerings/add', (req, res) => {
 
     var query = `Insert into Offering(PositionApplyID,CurrentSalary,ExpectSalary,OfferingSalary,LevelOffered,Result,Note,DeleteFlag) `
     +           `Values(${job.PositionApplyID},${job.CurrentSalary},${job.ExpectSalary},${job.OfferingSalary},N'${job.LevelOffered}',N'Pending',N' ','N') `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+//Update Offering.
+app.post('/offerings/update', (req, res) => {
+
+    let job = req.body;
+
+
+    var query = `Update Offering `
+    +           `Set CurrentSalary = ${job.CurrentSalary}, `
+    +           `ExpectSalary = ${job.ExpectSalary}, `
+    +           `OfferingSalary = ${job.OfferingSalary}, `
+    +           `LevelOffered = '${job.LevelOffered}', `
+    +           `Result = '${job.Result}', `
+    +           `Note = N'${job.Note}', `
+    +           `DeleteFlag = '${job.DeleteFlag}' `
+    +           `Where ID = ${job.OfferingID} `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+
+
+
+// Get Offerings list
+app.get('/probations', (req, res) => {
+    let cand = req.query;
+
+    var query = `Select Pro.ID as ProbationID,Pro.StartDate,Pro.EndDate,Pro.ProbationSalary,Pro.ContractedSalary,J.Name as Level,Pro.Result,Pro.Note,P.CandidateID,Pro.PositionApplyID,Pro.DeleteFlag `
+    +           `From Probation Pro, PositionApply p, Candidate c, Job j `
+    +           `Where 1 = 1 `
+    +           `And Pro.PositionApplyID = p.ID `
+    +           `And p.JobID = j.ID `
+    +           `And p.CandidateID = c.ID `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset); 
+            res.end();
+        }
+    });
+});
+
+
+//Add new Interviewing.
+app.post('/probations/add', (req, res) => {
+
+    let prob = req.body;
+
+
+    var query = `Insert into Probation(PositionApplyID,StartDate,EndDate,ProbationSalary,ContractedSalary,Note,Level,Result,DeleteFlag) `
+    +           `Values(${prob.PositionApplyID},'${prob.StartDate}','${prob.EndDate}',${prob.ProbationSalary},${prob.ContractedSalary},N'',${prob.Level},'Pending','N') `;
 
     request.query(query, (error, rows, fields) => {
         if (error) {

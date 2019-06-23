@@ -15,6 +15,7 @@ import { PagingComponent } from './paging/paging.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CandidateListModule } from './candidate-list/candidate-list.module';
 import { InterviewingListModule } from './interviewing-list/interviewing-list.module';
+import { OfferingListModule } from './offering-list/offering-list.module';
 
 
 
@@ -35,6 +36,7 @@ import { InterviewingListModule } from './interviewing-list/interviewing-list.mo
     AppRoutingModule,
     HttpClientModule,
     InterviewingListModule,
+    OfferingListModule,
     CandidateListModule,
     NgSelectModule,
     FormsModule

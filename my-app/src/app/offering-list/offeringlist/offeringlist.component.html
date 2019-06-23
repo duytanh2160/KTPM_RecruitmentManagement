@@ -1,0 +1,130 @@
+<title>Offering List</title>
+<div class="row" style="margin-top: 80px;">
+    <div class="col-sm-12">
+    </div>
+</div>
+
+
+<!--EDIT Offering-->
+<div class="modal fade" id="editOfferingForm" tabindex="-1" role="dialog" aria-labelledby="editOfferingForm"
+        aria-hidden="true">
+    <form #f="ngForm" id="EditForm" ngNativeValidate name="EditForm" (ngSubmit)="onSubmit(currentOffering)">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Offering Detail</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <!--Interview Note-->
+                    <div class="col-sm-12">
+                        <div class="row" style="padding-bottom: 15px;">
+                            <div class="picture">
+                                <img src="{{currentOffering.Candidate.Image}}" class="picture-src"
+                                    id="wizardPicturePreview" title="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <label class="font-weight-bold" style="padding-right: 15px;">Result:</label>
+                                <select [(ngModel)]="currentOffering.Result" (change)="onResultChange($event)" class="result-dropdown"
+                                    name="dropdownInterview">
+                                    <option value="Pending">Pending</option>
+                                    <option value="Fail">Fail</option>
+                                    <option value="Pass">Pass</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4" [hidden]="currentOffering.Result !== 'Pass'">
+                                <label class="font-weight-bold" style="padding-right: 15px;">Probation:</label>
+                                <input [(ngModel)]="isProbation" id="checkedBox" type="checkbox" name="isProbation" value="isChecked"
+                                    >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Interview Round-View-->
+
+                    <div [hidden]="isProbation" class="card-body" id="myCard"
+                      style="display:block; border-top: 1px solid rgba(0, 0, 0, 0.2);">
+                    
+                      <!--Interview Round-->
+                      <div class="tab-content">
+                        <div class="tab-pane fade show active" id="round1" role="tabpanel" aria-labelledby="round-tab">
+                    
+                          <label class="font-weight-bold">Current Salary: </label>
+                          <input [(ngModel)]="currentOffering.CurrentSalary" type="number" min="0" class="form-control" name="CurrentSalary" value=""
+                            placeholder="Enter salary" required="">
+                    
+                          <label class="font-weight-bold">Expect Salary: </label>
+                          <input [(ngModel)]="currentOffering.ExpectSalary" type="number" min="0" class="form-control" name="ExpectSalary" value=""
+                            placeholder="Enter salary" required="">
+                    
+                          <label class="font-weight-bold">Offering Salary: </label>
+                          <input [(ngModel)]="currentOffering.OfferingSalary" type="number" min="0" class="form-control" name="OfferingSalary"
+                            value="" placeholder="Enter salary" required="">
+                    
+                          <label class="font-weight-bold">Level Offered: </label>
+                        <select [(ngModel)]="currentOffering.LevelOffered"  name="LevelOffered" id="LevelOffered" placeholder="Select Level" class="form-control" required>
+                            <option *ngFor="let level of JobLevelList" value={{level.Name}}>{{level.Name}}</option>
+                        </select>
+    
+
+                          <label for="note-text" class="d-block"><b>Evaluation</b></label>
+                          <textarea [(ngModel)]="currentOffering.Note" name="note-text" style="width:100%; height:100px;" id="" cols="62" rows="8"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Offering check with card-body -->
+                    <div *ngIf="isProbation"  class="card-body" id="offeringCheck"
+                        style="border-top: 1px solid rgba(0, 0, 0, 0.2);">
+
+                        <div class="row">
+                            <div class="col-sm-6">                       
+                                <label for="sel1" class="d-block"><b>Start Date</b></label>
+                                <input [(ngModel)]="currentOffering.StartDate" type="date" name="startDate" id="startDate" class="form-control mb-2">
+                            </div>
+                            <div class="col-sm-6">                   
+                                <label for="sel1" class="d-block"><b>End Date</b></label>
+                                <input [(ngModel)]="currentOffering.EndDate" type="date" name="endDate" id="endDate" class="form-control mb-2">                      
+                            </div>
+                        </div>
+
+                        <label class="font-weight-bold">Probation Salary: </label>
+                        <input [(ngModel)]="currentOffering.ProbationSalary" type="number" min="0" class="form-control" name="ProbationSalary" value="" placeholder="Enter salary"
+                            required="">
+
+                        <label class="font-weight-bold">Contracted Salary: </label>
+                        <input [(ngModel)]="currentOffering.ContractedSalary" type="number" min="0" class="form-control" name="ContractedSalary" value="" placeholder="Enter salary"
+                            required="">
+
+                        <label class="font-weight-bold">Level: </label>
+                        <select [(ngModel)]="currentOffering.Level" name="Level" id="Level" placeholder="Select Level" class="form-control" required>
+                            <option *ngFor="let level of JobLevelList" value={{level.ID}}>{{level.Name}}</option>
+                        </select>
+                    </div>
+
+
+
+                </div>
+                <!-- Modal footer -->
+
+                <!--Button Save-->
+                <div class="modal-footer">
+                    <button name="btn_Submit" type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+<app-loadingpage *ngIf="isProcessing"></app-loadingpage>
+<app-offering-list-group-item (messageEvent)="receiveMessage($event)"></app-offering-list-group-item>

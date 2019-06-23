@@ -14,6 +14,8 @@ export class InterviewinglistComponent implements OnInit {
   isProcessing : boolean = false;
   isOffering : boolean = false;
   itvBeforeUpdate : any;
+
+  JobLevelList: any[];
   currentInterviewing : any ={
     Result : "",
     InterviewerName : "",
@@ -25,7 +27,9 @@ export class InterviewinglistComponent implements OnInit {
     }
   }
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+    this.getJobLevelsList();
+   }
 
   ngOnInit() {
   }
@@ -57,11 +61,18 @@ export class InterviewinglistComponent implements OnInit {
       });
     }
   }
-
   onResultChange($event){
     if($event.srcElement.value !== "Pass"){
       this.isOffering = false;
     }
+  }
+  //Get JobLevel List
+  getJobLevelsList() {
+    this.apiService.getJobLevels().subscribe(
+      res => {
+        this.JobLevelList = res;
+      });
+    console.log(this.JobLevelList);
   }
 
 
