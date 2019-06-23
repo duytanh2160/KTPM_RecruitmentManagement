@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CandidateListModule } from './candidate-list/candidate-list.module';
 import { InterviewingListModule } from './interviewing-list/interviewing-list.module';
 import { OfferingListModule } from './offering-list/offering-list.module';
+import { ProbationListModule } from './probation-list/probation-list.module';
 
 
 
@@ -37,6 +38,7 @@ import { OfferingListModule } from './offering-list/offering-list.module';
     HttpClientModule,
     InterviewingListModule,
     OfferingListModule,
+    ProbationListModule,
     CandidateListModule,
     NgSelectModule,
     FormsModule

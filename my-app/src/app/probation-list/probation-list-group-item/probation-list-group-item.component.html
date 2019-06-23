@@ -1,0 +1,63 @@
+<!-- Search -->
+<app-probation-list-search (messageEvent)="receiveMessage($event)"></app-probation-list-search>
+
+<div class="list-group" style="margin-top:10px">
+  <div class="list-group-item" *ngFor="let prob of ProbationList | stringFilter : search |  paginate: { itemsPerPage: 4, currentPage: p }">
+    <div class="row">
+      <div class="col-sm-2">
+        <a href="javascript:alert('Gắn link info vào đây');">
+          <div class="profile-img">
+            <img src="{{prob.Candidate?.Image}}" alt="">
+          </div>
+        </a>
+      </div>
+      <div class="col-sm-10">
+        <div class="row">
+          <div class="col-sm-12">
+            <input type="checkbox" class="ckb-export">
+            <h2 class="profile-name"><span>ID : {{prob.Candidate?.ID}} - {{prob.Candidate?.Fullname}}</span></h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="info">
+              <div><span>Job:</span> {{prob.Candidate?.PositionApply.Name}}</div>
+              <div><span>Probation Level:</span> {{prob.Level}}</div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="info">
+              <div><span>Start Date:</span> {{prob.StartDate}}</div>
+              <div><span>End Date:</span> {{prob.EndDate}}</div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="info">
+              <div><span>Probation Salary:</span> {{prob.ProbationSalary}}</div>
+              <div style="display: inline-block"><span>Contracted Salary:</span>
+                {{prob.ContractedSalary}}</div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="info">
+              <div><span>Result:</span> {{prob.Result}}</div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="action">
+              <button (click)="sendDataToForm(prob)" class="btn btn-secondary" data-toggle="modal" data-target="#editProbationForm"><a
+                  class="fa fa-cog"></a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="deleteFlagCount === ProbationList?.length" class="list-group-item">
+    <div class="row" style="height: 166px;">
+        <div class="nodata">No data to load !</div>
+    </div>
+</div>
+  <pagination-controls class="my-pagination text-center" (pageChange)="p = $event"></pagination-controls>
+</div>

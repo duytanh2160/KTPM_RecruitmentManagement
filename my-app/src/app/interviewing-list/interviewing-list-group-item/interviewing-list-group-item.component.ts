@@ -11,6 +11,7 @@ export class InterviewingListGroupItemComponent implements OnInit {
   InterviewingList : any[];
   public search : any;
   isLoadCompleted : boolean = false;
+  deleteFlagCount : number = 0;
   
 
   constructor(private apiService : ApiService) {
@@ -23,6 +24,7 @@ export class InterviewingListGroupItemComponent implements OnInit {
 
 
   getInterviewingList(){
+    this.deleteFlagCount = 0;
     this.apiService.getInterviewings().subscribe(
       (res) => {
         for (let itv of res) {
@@ -39,7 +41,9 @@ export class InterviewingListGroupItemComponent implements OnInit {
             }
           );
 
-
+          if(itv.DeleteFlag === "Y"){
+            this.deleteFlagCount++;
+          }
           itv.Date = itv.Date.substr(0,16).replace("T"," ");
         }
 

@@ -624,11 +624,10 @@ app.get('/probations', (req, res) => {
     let cand = req.query;
 
     var query = `Select Pro.ID as ProbationID,Pro.StartDate,Pro.EndDate,Pro.ProbationSalary,Pro.ContractedSalary,J.Name as Level,Pro.Result,Pro.Note,P.CandidateID,Pro.PositionApplyID,Pro.DeleteFlag `
-    +           `From Probation Pro, PositionApply p, Candidate c, Job j `
+    +           `From Probation Pro, JobLevel J, PositionApply p `
     +           `Where 1 = 1 `
     +           `And Pro.PositionApplyID = p.ID `
-    +           `And p.JobID = j.ID `
-    +           `And p.CandidateID = c.ID `;
+    +           `And Pro.Level = J.ID `;
 
     request.query(query, (error, rows, fields) => {
         if (error) {
@@ -645,7 +644,7 @@ app.get('/probations', (req, res) => {
 });
 
 
-//Add new Interviewing.
+//Add new Probation.
 app.post('/probations/add', (req, res) => {
 
     let prob = req.body;
@@ -653,6 +652,39 @@ app.post('/probations/add', (req, res) => {
 
     var query = `Insert into Probation(PositionApplyID,StartDate,EndDate,ProbationSalary,ContractedSalary,Note,Level,Result,DeleteFlag) `
     +           `Values(${prob.PositionApplyID},'${prob.StartDate}','${prob.EndDate}',${prob.ProbationSalary},${prob.ContractedSalary},N'',${prob.Level},'Pending','N') `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+//Update Probation
+app.post('/probations/update', (req, res) => {
+
+    let prob = req.body;
+
+
+    var query = `Update Probation `
+    +           `Set StartDate = '${prob.StartDate}', `
+    +           `EndDate = '${prob.EndDate}', `
+    +           `ProbationSalary = ${prob.ProbationSalary}, `
+    +           `ContractedSalary = ${prob.ContractedSalary}, `
+    +           `Level = ${prob.Level}, `
+    +           `Result = '${prob.Result}', `
+    +           `Note = N'${prob.Note}', `
+    +           `DeleteFlag = '${prob.DeleteFlag}' `
+    +           `Where ID = ${prob.ProbationID} `;
 
     request.query(query, (error, rows, fields) => {
         if (error) {

@@ -44,7 +44,7 @@
                     <option *ngFor="let level of JobLevelList" value={{level.Name}}>{{level.Name}}</option>
                 </select>
                 <label class="font-weight-bold" for="stage">Stage</label>
-                <select class="form-control" id="stage">
+                <select [(ngModel)]="ActionSearch" class="form-control" id="stage">
                     <option value="">All</option>
                     <option value="Interviewing">Interviewing</option>
                     <option value="Offering">Offering</option>
@@ -54,7 +54,13 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onSearchSubmit({searchVal : search, jobSearch : job, levelSearch : Level , deleteFlag : DeleteFlag})">Search</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onSearchSubmit({
+                    searchVal : search, 
+                    jobSearch : job, 
+                    levelSearch : Level, 
+                    deleteFlag : DeleteFlag,
+                    actionSearch : ActionSearch
+                })">Search</button>
             </div>
         </div>
     </div>

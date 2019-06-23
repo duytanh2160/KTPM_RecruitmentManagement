@@ -7,7 +7,7 @@
 <div class="list-group" style="margin-top:10px">
   <div class="list-group-item"
     *ngFor="let cand of candidates | stringFilter : search | paginate: { itemsPerPage: 4, currentPage: p }">
-    <div *ngIf="cand.PositionApply !== undefined" class="row">
+    <div class="row">
       <div class="col-sm-2">
         <a href="candidates/info/{{cand.ID}}">
           <div class="profile-img">
@@ -29,7 +29,7 @@
         <div class="row">
           <div class="col-sm-3">
             <div class="info">
-              <div><span>Job:</span> {{cand.PositionApply.Name}}</div>
+              <div><span>Job:</span> {{cand.PositionApply?.Name}}</div>
               <div><span>Level: </span> {{cand.Level}}</div>
             </div>
           </div>
@@ -63,5 +63,11 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="deleteFlagCount === candidates?.length" class="list-group-item">
+    <div class="row" style="height: 166px;">
+        <div class="nodata">No data to load !</div>
+    </div>
+</div>
   <pagination-controls class="my-pagination text-center" (pageChange)="p = $event"></pagination-controls>
 </div>

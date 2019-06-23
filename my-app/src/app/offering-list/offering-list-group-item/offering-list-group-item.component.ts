@@ -10,6 +10,7 @@ export class OfferingListGroupItemComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<any>();
   public search : any;
   OfferingList : any[];
+  deleteFlagCount : number = 0;
 
   constructor(private apiService: ApiService) {}
 
@@ -23,6 +24,7 @@ export class OfferingListGroupItemComponent implements OnInit {
 
 
   getOfferingList(){
+    this.deleteFlagCount = 0;
     this.apiService.getOfferrings().subscribe(
       res => {
         for(let off of res){
@@ -38,8 +40,12 @@ export class OfferingListGroupItemComponent implements OnInit {
               });
             }
           );
-        }
 
+          
+          if(off.DeleteFlag === "Y"){
+            this.deleteFlagCount++;
+          }
+        }
 
         this.OfferingList = res;
       }

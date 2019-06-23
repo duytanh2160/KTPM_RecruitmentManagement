@@ -1,0 +1,79 @@
+<div class="row" style="margin-top: 20px;">
+  <div class="col-sm-10" style="padding-right:0;">
+    <form>
+      <input [(ngModel)]="search" name="search"
+        (ngModelChange)="onSearchSubmit({searchVal : search, jobSearch : job, deleteFlag : DeleteFlag})" required
+        ngModel id="searchBar" type="text" placeholder="Search..">
+    </form>
+  </div>
+  <div class="col-sm-2" style="padding-left:0;">
+    <button onclick="w3_toggle()" class="btn btn-primary infoButton" style="margin-left:10px;">
+      <i class="fa fa-info" aria-hidden="true"></i>
+    </button>
+    <button class="btn btn-primary" style="float:right;width:100px;height:52px;" data-toggle="modal"
+      data-target="#advSearchProb">Filter</button>
+  </div>
+</div>
+
+
+
+<!-- The AdvSearch Modal -->
+<div class="modal fade" id="advSearchProb">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Advance Search</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <label class="font-weight-bold" for="job">Job</label>
+        <select [(ngModel)]="job" name="job" class="form-control" id="job">
+          <option selected value="">All</option>
+          <option *ngFor="let job of JobList" value={{job.Name}}>{{job.Name}}</option>
+        </select>
+        <label class="font-weight-bold" for="level">Level</label>
+        <select [(ngModel)]="Level" class="form-control" id="Level">
+          <option value="">All</option>
+          <option *ngFor="let level of JobLevelList" value={{level.Name}}>{{level.Name}}</option>
+        </select>
+
+        <label class="font-weight-bold" for="result">Result</label>
+        <select [(ngModel)]="ResultSearch" class="form-control" id="result">
+          <option value="">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Fail">Fail</option>
+          <option value="Pass">Pass</option>
+        </select>
+
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="sel1" class="d-block"><b>Start Date</b></label>
+            <input [(ngModel)]="StartDate" type="date" name="startDate" id="startDate"
+              class="form-control mb-2">
+          </div>
+          <div class="col-sm-6">
+            <label for="sel1" class="d-block"><b>End Date</b></label>
+            <input [(ngModel)]="EndDate" type="date" name="endDate" id="endDate"
+              class="form-control mb-2">
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="onSearchSubmit({
+                  searchVal : search,
+                  jobSearch : job, 
+                  levelSearch : Level,
+                  resultSearch : ResultSearch,
+                  startDateSearch : StartDate,
+                  endDateSearch : EndDate
+              })">Search</button>
+      </div>
+    </div>
+  </div>
+</div>

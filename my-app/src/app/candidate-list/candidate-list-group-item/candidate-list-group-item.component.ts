@@ -16,6 +16,7 @@ export class CandidateListGroupItemComponent implements OnInit {
 
   public search : Search;
   public candidates : Candidate[];
+  deleteFlagCount : number = 0;
 
 
   constructor(private apiService : ApiService) { 
@@ -42,6 +43,7 @@ export class CandidateListGroupItemComponent implements OnInit {
 
 
   public searchCandidates(searchStr : string){
+    this.deleteFlagCount = 0;
     if(searchStr == undefined){
       searchStr = "";
     }
@@ -62,6 +64,10 @@ export class CandidateListGroupItemComponent implements OnInit {
           }
           cand.Action = res.Action;
         });
+
+        if(cand.DeleteFlag === "Y"){
+          this.deleteFlagCount++;
+        }
 
       }
 

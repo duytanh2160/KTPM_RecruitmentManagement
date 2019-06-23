@@ -13,7 +13,7 @@ import { Search } from './search'
 
 export class StringFilterPipe implements PipeTransform {
 
-    transform(value : Candidate[], q : Search) {
+    transform(value : Candidate[], q : any) {
 
         if(!value){
             return value;
@@ -30,6 +30,13 @@ export class StringFilterPipe implements PipeTransform {
         }else{
             value = value.filter(item => -1 < item.DeleteFlag.toLowerCase().indexOf('n'));
         } 
+
+
+
+        //filter Job Level
+        if(q.actionSearch !== undefined && q.actionSearch !== ""){
+            value = value.filter(item => item.Action === q.actionSearch);
+        }
         
         
         //filter Job Level
