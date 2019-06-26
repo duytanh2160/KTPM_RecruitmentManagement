@@ -17,6 +17,7 @@ import { CandidateListModule } from './candidate-list/candidate-list.module';
 import { InterviewingListModule } from './interviewing-list/interviewing-list.module';
 import { OfferingListModule } from './offering-list/offering-list.module';
 import { ProbationListModule } from './probation-list/probation-list.module';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
@@ -30,7 +31,8 @@ import { ProbationListModule } from './probation-list/probation-list.module';
     TopnavComponent,
     RightSidebarComponent,
     FooterComponent,
-    PagingComponent
+    PagingComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
