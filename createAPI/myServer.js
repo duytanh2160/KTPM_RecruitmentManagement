@@ -334,7 +334,8 @@ app.get('/candidates/action', (req, res) => {
 app.get('/jobs', (req, res) => {
     let cand = req.query;
 
-    var query = `Select * from job`;
+    var query = `Select * From Job `
+    +           `Where DeleteFlag = 'N'`;
 
     request.query(query, (error, rows, fields) => {
         if (error) {
@@ -350,11 +351,14 @@ app.get('/jobs', (req, res) => {
     });
 });
 
-// Get JobLevel list
-app.get('/levels', (req, res) => {
-    let cand = req.query;
+//Add Job
+app.post('/jobs/add', (req, res) => {
 
-    var query = `Select * from JobLevel`;
+    let job = req.body;
+
+
+    var query = `Insert into Job(Name,Salary,Description,DeadLine,HeadCount,Requirement,DeleteFlag) `
+    +           `Values('${job.Name}',${job.Salary},N'${job.Description}','${job.DeadLine}',${job.HeadCount},N'${job.Requirement}','N') `;
 
     request.query(query, (error, rows, fields) => {
         if (error) {
@@ -364,11 +368,45 @@ app.get('/levels', (req, res) => {
         }
         else {
             res.header("Access-Control-Allow-Origin", "*");
-            res.send(rows.recordset); 
+            res.send(`{"result":"Successful"}`); 
             res.end();
         }
     });
 });
+
+//Add Job
+app.post('/jobs/update', (req, res) => {
+
+    let job = req.body;
+
+
+    var query = `Update Job `
+    +           `Set Name = '${job.Name}', `
+    +           `Salary = ${job.Salary}, `
+    +           `Description = N'${job.Description}', `
+    +           `DeadLine = '${job.DeadLine}', `
+    +           `HeadCount = ${job.HeadCount}, `
+    +           `Requirement = N'${job.Requirement}', `
+    +           `DeleteFlag = '${job.DeleteFlag}' `
+    +           `Where ID = ${job.ID} `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+
 
 //Add Candidate's Job Apply
 //params: CandididateID, JobID
@@ -443,6 +481,28 @@ app.post('/jobs/apply/deleteall', (req, res) => {
         else {
             res.header("Access-Control-Allow-Origin", "*");
             res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+// Get JobLevel list
+app.get('/levels', (req, res) => {
+    let cand = req.query;
+
+    var query = `Select * from JobLevel`;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset); 
             res.end();
         }
     });

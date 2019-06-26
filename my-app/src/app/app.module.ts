@@ -18,6 +18,7 @@ import { InterviewingListModule } from './interviewing-list/interviewing-list.mo
 import { OfferingListModule } from './offering-list/offering-list.module';
 import { ProbationListModule } from './probation-list/probation-list.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { JobListModule } from './job-list/job-list.module';
 
 
 
@@ -42,6 +43,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     OfferingListModule,
     ProbationListModule,
     CandidateListModule,
+    JobListModule,
     NgSelectModule,
     FormsModule
   ],

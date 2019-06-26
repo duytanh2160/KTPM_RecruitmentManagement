@@ -1,0 +1,96 @@
+<div class="row" style="margin-top: 100px;">
+  <div class="col-sm-10" style="padding-right:0;">
+      <form>
+          <input [(ngModel)]="search" name="search" required ngModel id="searchBar" type="text" placeholder="Search..">
+      </form>
+  </div>
+  <div class="col-sm-2" style="padding-left:0;">
+    <button onclick="w3_toggle()" class="btn btn-primary infoButton" style="margin-left:10px;">
+        <i class="fa fa-info" aria-hidden="true"></i>
+    </button>
+    <button (click)="onOpenAddFormClick()" class="btn btn-primary" style="float:right;width:100px;height:52px;"
+    data-toggle="modal" data-target="#editJobForm">Add</button>
+  </div>
+</div>
+
+
+
+<!-- Edit Field -->
+<div class="modal fade" id="editJobForm" style="display: none;" aria-hidden="true">
+  <form #f="ngForm" id="EditForm" ngNativeValidate name="EditForm" (ngSubmit)="onSubmit(currentJob)">
+  <div class="modal-dialog">
+      <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+              <h4 class="modal-title">Job's Detail</h4>
+              <button type="button" class="close" data-dismiss="modal">×</button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+              <div class="job-input">
+                  <label for=""><b>Title</b></label>
+                  <input [(ngModel)]="currentJob.Name" name="Name" class="form-control" type="text" placeholder="Enter Job Name" required>
+
+                  <label for=""><b>Salary</b></label>
+                  <input name="HeadCount" [(ngModel)]="currentJob.Salary" class="form-control" type="text" placeholder="Enter Salary" required>
+
+                  <label for=""><b>Headcount</b></label>
+                  <input name="HeadCount" [(ngModel)]="currentJob.HeadCount" class="form-control" type="text" placeholder="Enter Position" required>
+
+                  <label for=""><b>Deadline</b></label>
+                  <input [(ngModel)]="currentJob.DeadLine" name="DeadLine" class="form-control" type="date" id="" class="form-control mb-2" required>
+
+                  <label for=""><b>Requirement</b></label>
+                  <textarea [(ngModel)]="currentJob.Requirement" name="Requirement" class="form-control" placeholder="Enter requirement..." rows="5" required></textarea>
+
+                  <label for=""><b>Job Description</b></label>
+                  <textarea [(ngModel)]="currentJob.Description" name="Description" class="form-control" placeholder="Enter text.." rows="5"></textarea>
+              </div>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+              <label *ngIf="!isAddForm" class="font-weight-bold" for="DeleteFlag">Delete?</label>
+              <select [(ngModel)]="currentJob.DeleteFlag" *ngIf="!isAddForm"  name="DeleteFlag" id="DeleteFlag" class="form-control" required>
+                  <option value="N">No</option>
+                  <option value="Y">Yes</option>
+              </select>
+              <button name="btn_Submit" type="submit" class="btn btn-success">Save</button>
+          </div>
+
+      </div>
+  </div>
+  </form>
+</div>
+
+
+
+<table class="table table-bordered" style="margin-top:10px;">
+  <thead>
+      <tr>
+          <th>No.</th>
+          <th>Title</th>
+          <th>Headcount required</th>
+          <th>Deadline</th>
+          <th>Requirement</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let job of JobList | stringFilter : search | paginate: { itemsPerPage: 6, currentPage: p }">
+          <td>{{job.ID}}</td>
+          <td><a (click)="sendDataToForm(job)" href="#editJobForm" data-toggle="modal" data-target="#editJobForm">{{job.Name}}</a></td>
+          <td>{{job.HeadCount}}</td>
+          <td>{{job.DeadLine}}</td>
+          <td>{{job.Requirement}}</td>
+          <td>{{job.Description}}</td>
+        </tr>
+  </tbody>
+</table>
+<pagination-controls class="my-pagination text-center" (pageChange)="p = $event"></pagination-controls>
+
+
+
+<app-loadingpage *ngIf="isProcessing"></app-loadingpage>

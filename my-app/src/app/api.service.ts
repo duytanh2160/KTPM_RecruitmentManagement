@@ -66,8 +66,17 @@ export class ApiService {
   }
 
   public getJobs(){
-    return this.httpClient.get<Job[]>(`${this.apiURL}/jobs`);
+    return this.httpClient.get<any[]>(`${this.apiURL}/jobs`);
   }
+  public updateJob(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/jobs/update`,obj);
+  }
+  public addJob(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/jobs/add`,obj);
+  }
+
+
+
   public getJobLevels(){
     return this.httpClient.get<any>(`${this.apiURL}/levels`);
   }
