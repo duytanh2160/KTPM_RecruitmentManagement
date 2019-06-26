@@ -14,6 +14,7 @@ import { CandidateListGroupItemComponent } from './candidate-list-group-item/can
 
 import * as $ from "jquery";
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -31,6 +32,7 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
     HttpClientModule ,
     NgxPaginationModule, //pagination module
     FormsModule,
+    RouterModule,
     ReactiveFormsModule ,
     NgSelectModule
   ],

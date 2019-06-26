@@ -1,0 +1,188 @@
+  <h2 class="display-4 ml-4 mt-4 title">Candidate Profile</h2>
+  <div *ngIf="Candidate">
+  <div class="cand-title">
+      <div class="row">
+          <div class="col-md-3">
+              <div class="img-cand ml-4 my-4">
+                  <img src="{{Candidate.Image}}" onerror="this.onerror=null;this.src='../../assets/images/default/avatar.png'"
+                  alt="">
+              </div>
+          </div>
+          <div class="col-md-9">
+              <p class="name-cand">{{Candidate.Fullname}} <button class="btn btn-info btnEdit" id="btnEdit"><i class="fa fa-pencil"></i> Edit</button>
+                          <button class="btn btn-warning btnSave" onclick="success()" id="btnSave" style="display:none; margin-left: 50%"><i class="fa fa-check"></i>
+                          Save</button>
+              </p>
+          </div>
+      </div>
+  </div>
+  <div class="cand-section cand-info">
+      <h3 class="title">Information</h3>
+
+      <div class="row container">
+          <div class="col-6">
+              <p class="font-weight-bold">Birthday : <input [(ngModel)]="Candidate.BirthDay" name="BirthDay" class="form-control" type="text" id="" readonly=""></p>
+
+                      <p class="font-weight-bold" for="">Gender :
+                              <select [(ngModel)]="Candidate.Sex" name="Sex" name="" id="secGender" class="form-control" disabled="">
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                                  <option value="Other">Other</option>
+                              </select>
+                          </p>
+
+          </div>
+          <div class="col-6 ">
+              <p class="font-weight-bold">Source : <input [(ngModel)]="Candidate.Source" name="Source" class="form-control" type="text" id="" readonly=""></p>
+          </div>
+      </div>
+  </div>
+  <div class="cand-section cand-contact">
+      <h3 class="title">Contact</h3>
+
+      <div class="row container">
+          <div class="col-6">
+              <p class="font-weight-bold">Phone : <input [(ngModel)]="Candidate.PhoneNumber" name="PhoneNumber" class="form-control" type="text" id="" readonly=""></p>
+
+              <p class="font-weight-bold" for="">Address : <input [(ngModel)]="Candidate.Address" name="Address" class="form-control" type="text" id="" readonly=""></p>
+
+          </div>
+          <div class="col-6 ">
+              <p class="font-weight-bold">Email : <input [(ngModel)]="Candidate.Email" name="Email" class="form-control" type="text" id="" readonly=""></p>
+          </div>
+      </div>
+  </div>
+  <div class="cand-section cand-job">
+      <h3 class="title">Job</h3>
+
+      <div class="row container">
+          <div class="col-6">
+                  <p class="font-weight-bold">Job :
+                          <select name="" id="secJob" class="form-control" disabled="">
+                              <option value="rd">R&amp;D</option>
+                              <option value="test">Testing</option>
+                              <option value="stf">Staff</option>
+                              <option value="trai">Trainee</option>
+                          </select>
+                      </p>
+
+              <p class="font-weight-bold" for="">Skills : <input [(ngModel)]="Candidate.Skills" name="Skills" class="form-control" type="text" id="" readonly=""></p>
+                      <p class="font-weight-bold" for="">Experience years : <input [(ngModel)]="Candidate.Experience" name="Experience" class="form-control" type="number" id="exp" readonly=""></p>
+          </div>
+          <div class="col-6 ">
+                  <p class="font-weight-bold">Action :
+                          <input [(ngModel)]="Candidate.Action" name="Action" id="secAct" class="form-control" type="text" readonly="">
+                      </p>
+                      <p class="font-weight-bold">Result :
+                              <select [(ngModel)]="Candidate.Result" name="Result" id="secRes" class="form-control" disabled="">
+                                  <option value="Pending">Passed</option>
+                                  <option value="Fail">Failed</option>
+                                  <option value="Pass">Pending</option>
+                              </select>
+                      </p>
+          </div>
+      </div>
+  </div>
+
+  <div class="tabset" style="margin-left:40px">
+      <!-- Tab 1 -->
+      <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked="">
+      <label for="tab1">Interviewing</label>
+      <!-- Tab 2 -->
+      <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
+      <label for="tab2">Offering</label>
+      <!-- Tab 3 -->
+      <input type="radio" name="tabset" id="tab3" aria-controls="dunkles">
+      <label for="tab3">Probation</label>
+
+      <div class="tab-panels">
+          <section id="marzen" class="tab-panel">
+              <div class="wrap-table100">
+                  <div class="table100">
+                      <table>
+                          <thead>
+                              <tr class="table100-head">
+                                  <th class="column1">ID</th>
+                                  <th class="column2">Round</th>
+                                  <th class="column3">Date Time</th>
+                                  <th class="column4">Level</th>
+                                  <th class="column5">Result</th>
+                                  <th class="column6">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="column1">1</td>
+                                  <td class="column2">2</td>
+                                  <td class="column3">24-06-2019</td>
+                                  <td class="column4">R&amp;D</td>
+                                  <td class="column5">Pending</td>
+                                  <td class="column6"><button onclick="window.location.href='/Interviewing.html'" class="btn btn-warning">Details</button></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </section>
+          <section id="rauchbier" class="tab-panel">
+              <div class="wrap-table100">
+                  <div class="table100">
+                      <table>
+                          <thead>
+                              <tr class="table100-head">
+                                  <th class="column1">ID</th>
+                                  <!-- <th class="column2">DateTime</th> -->
+                                  <th class="column3">Level</th>
+                                  <th class="column4">Current Salary</th>                  
+                                  <th class="column5">Expected Salary</th>
+                                  <th class="column5">Offering Salary</th>
+                                  <th class="column6">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="column1">1</td>
+                                  <!-- <td class="column2">28-06-2019</td> -->
+                                  <td class="column3">R&amp;D</td>
+                                  <td class="column4">8.000.000 VND</td>
+                                  <td class="column5">9.500.000 VND</td>
+                                  <td class="column5">9.000.000 VND</td>
+                                  <td class="column6"><button onclick="window.location.href='/Offering.html'" class="btn btn-warning">Details</button></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </section>
+          <section id="dunkles" class="tab-panel">
+              <div class="wrap-table100">
+                  <div class="table100">
+                      <table>
+                          <thead>
+                              <tr class="table100-head">
+                                  <th class="column1">ID</th>
+                                  <th class="column2">Date</th>
+                                  <th class="column3">Start Date</th>
+                                  <th class="column4">Level</th>
+                                  <th class="column5">Result</th>
+                                  <th class="column6">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td class="column1">1</td>
+                                  <td class="column2">27-06-2019</td>
+                                  <td class="column3">13-07-2019</td>
+                                  <td class="column4">R&amp;D</td>
+                                  <td class="column5">Pending</td>
+                                  <td class="column6"><button onclick="window.location.href='/Probation.html'" class="btn btn-warning">Details</button></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </section>
+      </div>
+    </div>
+
+  </div>

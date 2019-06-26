@@ -177,6 +177,35 @@ app.get('/candidates/search', (req, res) => {
 });
 
 
+//Search candidate, can be used as GetAll
+//params: ID
+app.get('/candidates/singlesearch', (req, res) => {
+    let cand = req.query;
+
+
+    var query = `SELECT C.ID,Fullname,Sex,BirthDay,PhoneNumber,IdentifyNumber,Address,Email,Image,Skills,Experience,University,Source, J.Name as Level,DeleteFlag as DeleteFlag,Note` 
+             +` From Candidate C, JobLevel J`
+             +` Where 1 = 1`
+             +` AND C.LevelApply = J.ID`
+             +` And C.ID =  ${cand.ID} `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            //console.log(error);
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset); 
+            res.end();
+        }
+    });
+});
+
+
+
 // Get Candidate's position apply
 // params: ID
 app.get('/candidates/apply', (req, res) => {

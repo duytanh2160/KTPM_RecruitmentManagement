@@ -13,7 +13,7 @@ import { CandidatelistComponent } from './candidate-list/candidatelist/candidate
   providedIn: 'root'
 })
 export class ApiService {
-  apiURL : string = window.location.origin + ":8000";
+  apiURL : string = window.location.origin.replace(":4200",":8000");
 
   constructor(private httpClient : HttpClient) { 
 
@@ -37,6 +37,9 @@ export class ApiService {
 
   public searchCandidates(searchStr : string,searchCol : string){
     return this.httpClient.get<Candidate[]>(`${this.apiURL}/candidates/search?searchStr=${searchStr}&searchCol=${searchCol}`);
+  }
+  public searchCandidate(ID : number){
+    return this.httpClient.get<any[]>(`${this.apiURL}/candidates/singlesearch?ID=${ID}`);
   }
 
 
