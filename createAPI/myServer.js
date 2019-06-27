@@ -211,7 +211,7 @@ app.get('/candidates/singlesearch', (req, res) => {
 app.get('/candidates/apply', (req, res) => {
     let cand = req.query;
 
-    var query = "select J.ID as ID,J.Name as Name" 
+    var query = "select J.ID as ID,J.Name as Name, P.Action" 
               +" from Candidate C, Job J, PositionApply P" 
               +" Where P.CandidateID = C.ID and P.JobID = J.ID"
               +" And C.ID = " + cand.ID;
