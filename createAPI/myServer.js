@@ -279,6 +279,15 @@ app.post('/candidates/update', (req, res) => {
             +   `,Note = N'${cand.Note}', Image='${cand.Image}'`
             +   ` Where ID = ${cand.ID}`;
 
+    if(isNaN(+cand.Level)){
+        query = `UPDATE Candidate`
+            +   ` Set Fullname = N'${cand.Fullname}',Sex = '${cand.Sex}',BirthDay='${cand.BirthDay}',Address=N'${cand.Address}'`
+            +   `,Email='${cand.Email}',PhoneNumber='${cand.PhoneNumber}',IdentifyNumber='${cand.IdentifyNumber}'`
+            +   `,Skills = N'${cand.Skills}',Experience=N'${cand.Experience}',University=N'${cand.University}',Source=N'${cand.Source}',DeleteFlag='${cand.DeleteFlag}'`
+            +   `,Note = N'${cand.Note}', Image='${cand.Image}'`
+            +   ` Where ID = ${cand.ID}`;
+    }
+
     request.query(query, (error, rows, fields) => {
         if (error) {
             //console.log(error);

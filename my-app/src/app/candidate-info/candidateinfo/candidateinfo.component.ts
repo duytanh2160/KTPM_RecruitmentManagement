@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-candidateinfo',
@@ -15,6 +16,10 @@ export class CandidateinfoComponent implements OnInit {
   InterviewingList : any;
   OfferingList : any;
   ProbationList : any;
+  CandBeforeUpdate : any;
+
+  isEditing : boolean;
+  isProcessing : boolean;
 
   constructor(private route: ActivatedRoute,private router: Router,private apiService : ApiService) { }
 
@@ -55,8 +60,6 @@ export class CandidateinfoComponent implements OnInit {
       }
     );
   }
-
-
   getResult(Action){
     if(Action === "Interviewing"){
       this.Candidate.Result = this.InterviewingList.Result;
@@ -65,10 +68,10 @@ export class CandidateinfoComponent implements OnInit {
     }else if(Action === "Probation"){
       this.Candidate.Result = this.ProbationList.Result;
     }
-    console.log("Result: ",this.Candidate.Result);
+    this.CandBeforeUpdate = JSON.parse(JSON.stringify(this.Candidate));
+    console.log(this.CandBeforeUpdate);
+    // console.log("Result: ",this.Candidate.Result);
   }
-
-
   getInterviewingList(candID){
     this.apiService.getInterviewings().subscribe(
       (res) => {
@@ -102,6 +105,59 @@ export class CandidateinfoComponent implements OnInit {
         console.log("ProbationList: ",this.ProbationList);
       }
     );
+  }
+  onEditButtonClick(){
+    this.isEditing = true;
+  }
+  showAlert(text, type) {
+    if (type === "success") {
+      Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: text,
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
+    else if (type === "error") {
+      Swal.fire({
+        position: 'center',
+        type: 'error',
+        title: text,
+        showConfirmButton: true,
+      });
+    }
+  }
+  validateForm(cand : any){
+    if (JSON.stringify(this.CandBeforeUpdate) === JSON.stringify(cand)) {
+      this.showAlert("There's nothing change !", "error");
+      return false;
+    }
+
+
+    return true;
+  }
+  onSaveButtonClick(cand){
+    console.log("Update: ",cand);
+    this.isEditing = false;
+    if(this.validateForm(cand)){
+    this.isProcessing = true;
+    this.apiService.updateCandidate(cand).subscribe(
+      (res) => {
+        if (res.result === "Successful") {
+          this.isProcessing = false;
+          this.showAlert("Update Completed !", "success");
+          this.CandBeforeUpdate = JSON.parse(JSON.stringify(this.Candidate));
+        }
+      }, (err) =>{
+        console.error("Error: ",err.error.text);
+        this.isProcessing = false;
+        this.showAlert("Update Failed !", "error");
+        this.Candidate = JSON.parse(JSON.stringify(this.CandBeforeUpdate));
+      }
+    );
+
+    }
   }
 
 }

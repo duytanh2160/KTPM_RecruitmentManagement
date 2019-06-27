@@ -6,7 +6,7 @@
     <div class="list-group-item" *ngFor="let itv of InterviewingList | stringFilter : search | paginate: { itemsPerPage: 4, currentPage: p }">
         <div *ngIf="itv.Candidate?.PositionApply !== undefined" class="row">
             <div class="col-sm-2">
-                <a href="javascript:alert('Gắn link info vào đây');">
+                <a routerLink="/Info/{{itv.Candidate?.ID}}" routerLinkActive="active">
                     <div class="profile-img">
                         <img src="{{itv.Candidate?.Image}}"
                             onerror="this.onerror=null;this.src='../../assets/images/default/avatar.png'" alt="">

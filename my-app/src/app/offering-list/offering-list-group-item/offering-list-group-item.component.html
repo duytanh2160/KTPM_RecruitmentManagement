@@ -5,7 +5,7 @@
     <div class="list-group-item" *ngFor="let off of OfferingList | stringFilter : search | paginate: { itemsPerPage: 4, currentPage: p }">
         <div class="row">
             <div class="col-sm-2">
-                <a href="javascript:alert('Gắn link info vào đây');">
+                <a routerLink="/Info/{{off.Candidate?.ID}}" routerLinkActive="active">
                     <div class="profile-img">
                         <img src="{{off.Candidate?.Image}}" alt="">
                     </div>

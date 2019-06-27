@@ -9,6 +9,7 @@ import { OfferingListGroupItemComponent } from './offering-list-group-item/offer
 import { OfferingListSearchComponent } from './offering-list-search/offering-list-search.component';
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { StringFilterPipe } from './string-filter.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { StringFilterPipe } from './string-filter.pipe';
     HttpClientModule,
     NgxPaginationModule, //pagination module
     FormsModule,
+    RouterModule,
     ReactiveFormsModule ,
     NgSelectModule
   ],

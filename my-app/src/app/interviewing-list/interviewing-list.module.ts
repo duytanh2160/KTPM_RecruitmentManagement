@@ -9,6 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { StringFilterPipe } from './string-filter.pipe';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { StringFilterPipe } from './string-filter.pipe';
     HttpClientModule,
     NgxPaginationModule, //pagination module
     FormsModule,
+    RouterModule,
     ReactiveFormsModule ,
     NgSelectModule
   ],
