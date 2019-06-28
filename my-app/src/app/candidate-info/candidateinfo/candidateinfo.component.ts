@@ -57,6 +57,16 @@ export class CandidateinfoComponent implements OnInit {
           this.getResult(res1.Action);
         });
         this.Candidate = res[0];
+
+        this.apiService.getPositionApply(ID).subscribe((pos) => {
+          if(pos === null){
+            pos = {
+              ID : "",
+              Name : ""
+            }
+          }
+          this.Candidate.PositionApply = pos;
+        });
       }
     );
   }

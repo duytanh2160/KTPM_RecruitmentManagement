@@ -73,7 +73,7 @@
       <div class="row container">
           <div class="col-6">
                   <p class="font-weight-bold">Job :
-                    <input name="Job" class="form-control allowedit" type="text" id="" readonly>
+                    <input [(ngModel)]="Candidate.PositionApply.Name" name="Job" class="form-control allowedit" type="text" id="" readonly>
                  </p>
 
               <p class="font-weight-bold" for="">Skills : <input [(ngModel)]="Candidate.Skills" name="Skills" class="form-control allowedit" type="text" id="" [readonly]="!isEditing"></p>
