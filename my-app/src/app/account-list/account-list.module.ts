@@ -6,9 +6,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { StringFilterPipe } from './accountlist/string-filter.pipe';
+import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 
 @NgModule({
-  declarations: [AccountlistComponent],
+  declarations: [
+    AccountlistComponent, 
+    LoadingpageComponent,
+    StringFilterPipe
+  ],
   imports: [
     CommonModule,
     HttpClientModule,

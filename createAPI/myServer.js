@@ -804,7 +804,8 @@ app.post('/probations/update', (req, res) => {
 app.get('/accounts', (req, res) => {
     let acc = req.query;
 
-    var query = `Select * From Account `;
+    var query = `Select * From Account `
+    +           `Where DeleteFlag = 'N' `;
 
     request.query(query, (error, rows, fields) => {
         if (error) {
@@ -829,6 +830,7 @@ app.post('/accounts/update', (req, res) => {
     +           `Set Password = '${acc.Password}', `
     +           `Email = '${acc.Email}', `
     +           `FullName = N'${acc.FullName}', `
+    +           `DeleteFlag = '${acc.DeleteFlag}', `
     +           `RoleID = ${acc.RoleID} `
     +           `Where ID = ${acc.ID} `;
 
@@ -852,8 +854,8 @@ app.post('/accounts/add', (req, res) => {
     let acc = req.body;
 
 
-    var query = `Insert Into Account `
-    +           `Values('${acc.UserName}','${acc.Password}','${acc.Email}',${acc.RoleID},N'${acc.FullName}') `;
+    var query = `Insert Into Account(UserName,Password,Email,RoleID,FullName,DeleteFlag) `
+    +           `Values('${acc.UserName}','${acc.Password}','${acc.Email}',${acc.RoleID},N'${acc.FullName}','N') `;
 
     request.query(query, (error, rows, fields) => {
         if (error) {

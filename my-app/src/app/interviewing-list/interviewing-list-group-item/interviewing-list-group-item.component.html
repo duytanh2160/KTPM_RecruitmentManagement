@@ -54,6 +54,11 @@
         </div>
     </div>
 
+    <div *ngIf="!isLoadCompleted" class="list-group-item">
+            <div class="row" style="height: 166px;">
+                <div class="nodata"><i class="fas fa-spinner fa-spin"></i> Now Loading...</div>
+            </div>
+    </div>
     <div *ngIf="deleteFlagCount === InterviewingList?.length" class="list-group-item">
         <div class="row" style="height: 166px;">
             <div class="nodata">No data to load !</div>

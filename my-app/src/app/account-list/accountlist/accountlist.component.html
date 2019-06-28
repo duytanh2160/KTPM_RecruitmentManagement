@@ -31,10 +31,16 @@
           <div class="modal-body">
               <div class="job-input">
                   <label for=""><b>Full Name :</b></label>
-                  <input [(ngModel)]="currentAccount.Name" name="Name" class="form-control" type="text" placeholder="Enter name" required>
+                  <input [(ngModel)]="currentAccount.FullName" name="Name" class="form-control" type="text" placeholder="Enter name" required>
 
                   <label for=""><b>User name :</b></label>
-                  <input name="UserName" [(ngModel)]="currentAccount.UserName" class="form-control" type="text" placeholder="Enter user name" required>
+                  <input [disabled]="!isAddForm" name="UserName" [(ngModel)]="currentAccount.UserName" class="form-control" type="text" placeholder="Enter user name" required>
+
+                  <label *ngIf="changePassword" for=""><b>Password  :</b></label>
+                  <input *ngIf="changePassword" name="NewPass" [(ngModel)]="currentAccount.NewPass" class="form-control" type="password" placeholder="Enter password" required>
+
+                  <label *ngIf="changePassword" for=""><b>Retype Password  :</b></label>
+                  <input *ngIf="changePassword" name="RetypePass" [(ngModel)]="currentAccount.RetypePass" class="form-control" type="password" placeholder="Enter password" required>
 
                   <label for=""><b>Email :</b></label>
                   <input name="Email" [(ngModel)]="currentAccount.Email" class="form-control" type="text" placeholder="Enter email" required>
@@ -48,6 +54,10 @@
 
           <!-- Modal footer -->
           <div class="modal-footer">
+            
+            <label *ngIf="!isAddForm" class="font-weight-bold" style="padding-left: 20px;position: absolute;left: 0;">Change Password:
+            <input [(ngModel)]="changePassword" type="checkbox" name="changePassword">
+            </label>
               <label *ngIf="!isAddForm" class="font-weight-bold" for="DeleteFlag">Delete?</label>
               <select [(ngModel)]="currentAccount.DeleteFlag" *ngIf="!isAddForm"  name="DeleteFlag" id="DeleteFlag" class="form-control" required>
                   <option value="N">No</option>
@@ -62,26 +72,26 @@
 </div>
 
 
-<table class="table table-bordered" style="margin-top:10px;">
-  <thead>
+<table class="table table-bordered table-hover table-striped" style="margin-top:10px;">
+  <thead class="thead-dark">
   <tr>
-      <th>ID</th>
+      <th style="width:1%">ID</th>
       <th>UserName</th>
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
-      <th>Action</th>
+      <th style="width:6%">Action</th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let acc of AccountList">
+  <tr *ngFor="let acc of AccountList | stringFilter : search | paginate: { itemsPerPage: 5, currentPage: p }">
       <td>{{acc.ID}}</td>
       <td>{{acc.UserName}}</td>
       <td>{{acc.FullName}}</td>
       <td>{{acc.Email}}</td>
       <td>{{acc.Role?.Name}}</td>
       <td>
-          <a (click)="sendDataToForm(acc)" class="edit-action btn btn-secondary" data-toggle="modal" data-target="#editAccountForm" value=""><i class="far fa-edit"></i></a>
+          <a (click)="sendDataToForm(acc)" class="edit-action btn btn-secondary" data-toggle="modal" data-target="#editAccountForm" value=""><i class="fas fa-edit"></i></a>
       </td>
   </tr>
   </tbody>
@@ -89,5 +99,5 @@
 <pagination-controls class="my-pagination text-center" (pageChange)="p = $event"></pagination-controls>
 
 
-<!-- 
-<app-loadingpage *ngIf="isProcessing"></app-loadingpage> -->
+
+<app-loadingpage *ngIf="isProcessing"></app-loadingpage>

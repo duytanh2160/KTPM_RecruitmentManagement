@@ -55,7 +55,7 @@
           <div class="col-sm-3">
             <div class="action">
               <button class="btn btn-secondary" data-toggle="modal" data-target="#addCandidateForm"
-                (click)="insertDataToForm(cand)"><a class="fa fa-pencil"></a></button>
+                (click)="insertDataToForm(cand)"><a class="fas fa-user-edit"></a></button>
             </div>
           </div>
         </div>
@@ -63,6 +63,11 @@
     </div>
   </div>
 
+<div *ngIf="!isLoadCompleted" class="list-group-item">
+      <div class="row" style="height: 166px;">
+          <div class="nodata"><i class="fas fa-spinner fa-spin"></i> Now Loading...</div>
+      </div>
+</div>
   <div *ngIf="deleteFlagCount === candidates?.length" class="list-group-item">
     <div class="row" style="height: 166px;">
         <div class="nodata">No data to load !</div>

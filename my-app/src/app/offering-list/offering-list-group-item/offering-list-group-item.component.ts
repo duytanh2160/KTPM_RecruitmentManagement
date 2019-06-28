@@ -11,6 +11,7 @@ export class OfferingListGroupItemComponent implements OnInit {
   public search : any;
   OfferingList : any[];
   deleteFlagCount : number = 0;
+  isLoadCompleted : boolean = false;
 
   constructor(private apiService: ApiService) {}
 
@@ -48,6 +49,7 @@ export class OfferingListGroupItemComponent implements OnInit {
         }
 
         this.OfferingList = res;
+        this.isLoadCompleted = true;
       }
     );
   }

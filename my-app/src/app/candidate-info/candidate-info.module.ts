@@ -6,9 +6,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BrowserModule } from '@angular/platform-browser';
+import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 
 @NgModule({
-  declarations: [CandidateinfoComponent],
+  declarations: [
+    CandidateinfoComponent,
+    LoadingpageComponent,
+  ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,

@@ -45,6 +45,7 @@ export class InterviewingListGroupItemComponent implements OnInit {
             this.deleteFlagCount++;
           }
           itv.Date = itv.Date.substr(0,16).replace("T"," ");
+          this.isLoadCompleted = true;
         }
 
 

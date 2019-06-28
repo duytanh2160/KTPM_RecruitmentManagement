@@ -67,25 +67,29 @@
 
 
 
-<table class="table table-bordered" style="margin-top:10px;">
-  <thead>
+<table class="table table-bordered table-hover table-striped" style="margin-top:10px;">
+    <thead class="thead-dark">
       <tr>
-          <th>No.</th>
+          <th style="width:5%">No.</th>
           <th>Title</th>
-          <th>Headcount required</th>
+          <th>Headcount</th>
           <th>Deadline</th>
-          <th>Requirement</th>
-          <th>Description</th>
+          <th style="width:20%">Requirement</th>
+          <th style="width:30%">Description</th>
+          <th style="width:7%">Action</th>
       </tr>
   </thead>
   <tbody>
       <tr *ngFor="let job of JobList | stringFilter : search | paginate: { itemsPerPage: 6, currentPage: p }">
           <td>{{job.ID}}</td>
-          <td><a (click)="sendDataToForm(job)" href="#editJobForm" data-toggle="modal" data-target="#editJobForm">{{job.Name}}</a></td>
+          <td>{{job.Name}}</td>
           <td>{{job.HeadCount}}</td>
           <td>{{job.DeadLine}}</td>
           <td>{{job.Requirement}}</td>
           <td>{{job.Description}}</td>
+          <td>
+            <a (click)="sendDataToForm(job)" class="edit-action btn btn-secondary" data-toggle="modal" data-target="#editJobForm" value=""><i class="fas fa-edit"></i></a>
+         </td>
         </tr>
   </tbody>
 </table>

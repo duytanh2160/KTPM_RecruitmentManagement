@@ -11,6 +11,7 @@ export class ProbationListGroupItemComponent implements OnInit {
   public search : any;
   ProbationList : any[];
   deleteFlagCount : number = 0;
+  isLoadCompleted : boolean = false;
 
   constructor(private apiService: ApiService) { 
     
@@ -52,6 +53,7 @@ export class ProbationListGroupItemComponent implements OnInit {
 
 
         this.ProbationList = res;
+        this.isLoadCompleted = true;
         console.log(res);
       }
     );

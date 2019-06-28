@@ -10,6 +10,7 @@ import Swal from 'sweetalert2';
 export class AccountlistComponent implements OnInit {
   isProcessing : boolean;
   isAddForm : boolean;
+  changePassword : boolean;
 
   AccountList : any[];
   RoleList : any[];
@@ -27,12 +28,11 @@ export class AccountlistComponent implements OnInit {
   public search : any;
 
 
-  constructor(private apiService : ApiService) { }
-
-  ngOnInit() {
+  constructor(private apiService : ApiService) {
     this.getRoleList();
-    this.getAccountList();
   }
+
+  ngOnInit() { }
   showAlert(text, type) {
     if (type === "success") {
       Swal.fire({
@@ -67,30 +67,33 @@ export class AccountlistComponent implements OnInit {
     this.apiService.getRoles().subscribe(
       (res : any[]) =>{
         this.RoleList = res;
+        this.getAccountList();
       }
     );
   }
   onOpenAddFormClick() {
+    this.changePassword = true;
     this.isAddForm = true;
 
-    // this.currentJob = {
-    //   ID : "",
-    //   Name : "",
-    //   HeadCount : "",
-    //   DeadLine : "",
-    //   Requirement : "",
-    //   Description : ""
-    // }
+    this.currentAccount = {
+      FullName : "",
+      UserName : "",
+      Email : "",
+      Role : {
+        ID : "",
+        Name : ""
+      },
+    }
   }
   sendDataToForm(acc){
+    this.changePassword = false;
     this.isAddForm = false;
     console.log("Edit Form: ",acc);
 
-    // this.currentJob = JSON.parse(JSON.stringify(job));
-    // this.jobBeforeUpdate = JSON.parse(JSON.stringify(this.currentJob));
+    this.currentAccount = JSON.parse(JSON.stringify(acc));
+    this.accBeforeUpdate = JSON.parse(JSON.stringify(this.currentAccount));
   }
   onSubmit(acc : any) {
-    console.log("On Submit: ",acc);
     if (this.validateForm(acc)) {
       if (this.isAddForm) {
         this.onAddSubmit(acc);
@@ -105,19 +108,37 @@ export class AccountlistComponent implements OnInit {
       return false;
     }
 
+    if(this.changePassword){
+      if(acc.NewPass !== acc.RetypePass){
+        this.showAlert("Passwords are not the same !", "error");
+        return false;
+      }else{
+        acc.Password = acc.NewPass;
+      }
+    }
+
+    if (this.isAddForm) {
+      if (JSON.stringify(this.AccountList.filter(x => x.UserName === acc.UserName)) !== "[]"){
+        this.showAlert("Username already existed !", "error");
+        return false;
+      }
+    }
+
 
     return true;
   }
-  onAddSubmit(job : any){
+  onAddSubmit(acc : any){
     this.isProcessing = true;
-    this.apiService.addAccount(job).subscribe(
+    acc.RoleID = acc.Role.ID;
+    console.log("On Add: ",acc);
+    this.apiService.addAccount(acc).subscribe(
       (res) => {
         if (res.result === "Successful") {
           this.isProcessing = false;
           this.showAlert("Add Completed !", "success");
           this.getAccountList();
           setTimeout(function(){
-            $("#editJobForm").find(".close").click();
+            $("#editAccountForm").find(".close").click();
           },1500);
         }
       }
@@ -127,6 +148,9 @@ export class AccountlistComponent implements OnInit {
   }
   onUpdateSubmit(acc : any){
     this.isProcessing = true;
+    acc.RoleID = acc.Role.ID;
+    console.log("On Update: ",acc);
+
     this.apiService.updateAccount(acc).subscribe(
       (res) =>{
         if (res.result === "Successful") {
@@ -134,7 +158,7 @@ export class AccountlistComponent implements OnInit {
           this.showAlert("Update Completed !", "success");
           this.getAccountList();
           setTimeout(function(){
-            $("#editJobForm").find(".close").click();
+            $("#editAccountForm").find(".close").click();
           },1500);
         }
       }

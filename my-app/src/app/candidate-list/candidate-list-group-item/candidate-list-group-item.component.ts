@@ -17,6 +17,7 @@ export class CandidateListGroupItemComponent implements OnInit {
   public search : Search;
   public candidates : Candidate[];
   deleteFlagCount : number = 0;
+  isLoadCompleted : boolean = false;
 
 
   constructor(private apiService : ApiService) { 
@@ -73,6 +74,7 @@ export class CandidateListGroupItemComponent implements OnInit {
 
 
       this.candidates = res;
+      this.isLoadCompleted = true;
     });
 
 

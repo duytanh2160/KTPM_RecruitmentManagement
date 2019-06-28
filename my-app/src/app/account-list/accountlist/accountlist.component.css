@@ -1,0 +1,79 @@
+#DeleteFlag{
+    width: 20%;
+}
+
+
+tr{
+  animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.my-pagination /deep/ .ngx-pagination  {
+    margin-top:20px;
+    position:absolute;
+    bottom:0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.list-group{
+    height:870px;
+    position: relative;
+}
+
+.list-group-item{
+    animation: slide-in-fwd-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes slide-in-fwd-center {
+    0% {
+      -webkit-transform: translateZ(-1400px);
+              transform: translateZ(-1400px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slide-in-fwd-center {
+    0% {
+      -webkit-transform: translateZ(-1400px);
+              transform: translateZ(-1400px);
+      opacity: 0;
+    }
+    100% {
+      -webkit-transform: translateZ(0);
+              transform: translateZ(0);
+      opacity: 1;
+    }
+  }
+  
+
+.profile-img{
+    margin:auto;
+    height: 150px;
+    width:150px;
+    position: relative;
+    border: 2px solid black;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+
+
+.profile-img img{
+    width:150px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.nodata{
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+}
