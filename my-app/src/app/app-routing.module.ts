@@ -10,6 +10,7 @@ import { ProbationlistComponent } from './probation-list/probationlist/probation
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { JoblistComponent } from './job-list/joblist/joblist.component';
 import { CandidateinfoComponent } from './candidate-info/candidateinfo/candidateinfo.component';
+import { AccountlistComponent } from './account-list/accountlist/accountlist.component';
 
 const routes : Routes = [
   { path : '', component : CandidatelistComponent, data: {title: 'Candidate List'} },
@@ -17,6 +18,8 @@ const routes : Routes = [
   { path : 'Offering', component : OfferinglistComponent, data: {title: 'Offering List'} },
   { path : 'Probation', component : ProbationlistComponent, data: {title: 'Probation List'} },
   { path : 'Job', component : JoblistComponent, data: {title: 'Job List'} },
+  { path : 'Account', component : AccountlistComponent
+  , data: {title: 'Account List'} },
   { path : 'Info/:candidateID', component : CandidateinfoComponent, data: {title: 'Candidate Info'} },
   { path : 'dev', component : HelloworldComponent },
   { path: '**', redirectTo: '/404'},

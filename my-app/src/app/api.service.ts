@@ -128,5 +128,22 @@ export class ApiService {
   }
 
 
+  public getAccounts(){
+    return this.httpClient.get<any[]>(`${this.apiURL}/accounts`);
+  }
+  public addAccount(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/accounts/add`,obj);
+  }
+  public updateAccount(obj : any) : Observable<any>{
+    return this.httpClient.post<any>(`${this.apiURL}/accounts/update`,obj);
+  }
+
+  public getRoles(){
+    return this.httpClient.get<any[]>(`${this.apiURL}/roles`);
+  }
+  
+
+
+
   
 }

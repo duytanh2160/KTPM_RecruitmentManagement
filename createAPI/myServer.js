@@ -797,3 +797,98 @@ app.post('/probations/update', (req, res) => {
         }
     });
 });
+
+
+
+// Get Account list
+app.get('/accounts', (req, res) => {
+    let acc = req.query;
+
+    var query = `Select * From Account `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset); 
+            res.end();
+        }
+    });
+});
+
+app.post('/accounts/update', (req, res) => {
+
+    let acc = req.body;
+
+
+    var query = `Update Account `
+    +           `Set Password = '${acc.Password}', `
+    +           `Email = '${acc.Email}', `
+    +           `FullName = N'${acc.FullName}', `
+    +           `RoleID = ${acc.RoleID} `
+    +           `Where ID = ${acc.ID} `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+app.post('/accounts/add', (req, res) => {
+
+    let acc = req.body;
+
+
+    var query = `Insert Into Account `
+    +           `Values('${acc.UserName}','${acc.Password}','${acc.Email}',${acc.RoleID},N'${acc.FullName}') `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(`{"result":"Successful"}`); 
+            res.end();
+        }
+    });
+});
+
+
+
+
+
+
+app.get('/roles', (req, res) => {
+    let rol = req.query;
+
+    var query = `Select * From Role `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset); 
+            res.end();
+        }
+    });
+});
