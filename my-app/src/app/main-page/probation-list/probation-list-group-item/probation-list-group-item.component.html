@@ -5,7 +5,7 @@
   <div class="list-group-item" *ngFor="let prob of ProbationList | stringFilter : search |  paginate: { itemsPerPage: 4, currentPage: p }">
     <div class="row">
       <div class="col-sm-2">
-        <a routerLink="/Info/{{prob.Candidate?.ID}}" routerLinkActive="active">
+        <a routerLink="/Main/Info/{{prob.Candidate?.ID}}" routerLinkActive="active">
           <div class="profile-img">
             <img src="{{prob.Candidate?.Image}}" alt="">
           </div>

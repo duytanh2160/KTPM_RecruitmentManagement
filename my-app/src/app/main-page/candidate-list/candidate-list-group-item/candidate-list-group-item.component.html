@@ -9,7 +9,7 @@
     *ngFor="let cand of candidates | stringFilter : search | paginate: { itemsPerPage: 4, currentPage: p }">
     <div class="row">
       <div class="col-sm-2">
-        <a routerLink="/Info/{{cand.ID}}" routerLinkActive="active">
+        <a routerLink="/Main/Info/{{cand.ID}}" routerLinkActive="active">
           <div class="profile-img">
             <img src="{{cand.Image}}" onerror="this.onerror=null;this.src='../../assets/images/default/avatar.png'"
               alt="">
