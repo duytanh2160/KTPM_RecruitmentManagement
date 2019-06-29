@@ -4,7 +4,7 @@ import { Candidate } from './candidate';
 import { Observable } from 'rxjs';
 import { UploadEntity } from './upload-entity';
 import { Job } from './job';
-import { CandidatelistComponent } from './candidate-list/candidatelist/candidatelist.component';
+import { CandidatelistComponent } from './main-page/candidate-list/candidatelist/candidatelist.component';
 
 // Tutorial from: https://www.techiediaries.com/angular-httpclient/
 

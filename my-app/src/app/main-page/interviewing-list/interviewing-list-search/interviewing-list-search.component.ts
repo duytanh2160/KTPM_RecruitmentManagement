@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output , ViewChild} from '@angular/core';
-import { Search } from '../../search';
-import { ApiService } from '../../api.service';
+import { Search } from '../../../search';
+import { ApiService } from '../../../api.service';
 
 @Component({
   selector: 'app-interviewing-list-search',

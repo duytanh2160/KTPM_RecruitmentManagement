@@ -5,22 +5,22 @@ import { FormsModule }   from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AppComponent } from './app.component';
 
-import { HelloworldComponent } from './helloworld/helloworld.component';
-import { WebTemplateComponent } from './web-template/web-template.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { TopnavComponent } from './topnav/topnav.component';
-import { RightSidebarComponent } from './right-sidebar/right-sidebar.component';
-import { FooterComponent } from './footer/footer.component';
-import { PagingComponent } from './paging/paging.component';
+import { HelloworldComponent } from './main-page/helloworld/helloworld.component';
+import { WebTemplateComponent } from './main-page/web-template/web-template.component';
+import { SidebarComponent } from './main-page/sidebar/sidebar.component';
+import { TopnavComponent } from './main-page/topnav/topnav.component';
+import { RightSidebarComponent } from './main-page/right-sidebar/right-sidebar.component';
+import { FooterComponent } from './main-page/footer/footer.component';
+import { PagingComponent } from './main-page/paging/paging.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CandidateListModule } from './candidate-list/candidate-list.module';
-import { InterviewingListModule } from './interviewing-list/interviewing-list.module';
-import { OfferingListModule } from './offering-list/offering-list.module';
-import { ProbationListModule } from './probation-list/probation-list.module';
+import { CandidateListModule } from './main-page/candidate-list/candidate-list.module';
+import { InterviewingListModule } from './main-page/interviewing-list/interviewing-list.module';
+import { OfferingListModule } from './main-page/offering-list/offering-list.module';
+import { ProbationListModule } from './main-page/probation-list/probation-list.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { JobListModule } from './job-list/job-list.module';
-import { CandidateInfoModule } from './candidate-info/candidate-info.module';
-import { AccountListModule } from './account-list/account-list.module';
+import { JobListModule } from './main-page/job-list/job-list.module';
+import { CandidateInfoModule } from './main-page/candidate-info/candidate-info.module';
+import { AccountListModule } from './main-page/account-list/account-list.module';
 
 
 

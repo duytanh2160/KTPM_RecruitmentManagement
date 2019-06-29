@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ApiService } from '../../api.service';
-import { Candidate } from '../../candidate';
+import { ApiService } from '../../../api.service';
+import { Candidate } from '../../../candidate';
 import { NgForm } from '@angular/forms';
 import { NgSelectModule, NgOption, NgSelectComponent } from '@ng-select/ng-select';
 import { Job } from 'src/app/job';

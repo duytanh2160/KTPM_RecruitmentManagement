@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output , ViewChild} from '@angular/core';
 import { CandidateListGroupItemComponent } from '../candidate-list-group-item/candidate-list-group-item.component';
-import { Search } from '../../search';
-import { ApiService } from '../../api.service';
+import { Search } from '../../../search';
+import { ApiService } from '../../../api.service';
 
 @Component({
   providers:[ CandidateListGroupItemComponent ],

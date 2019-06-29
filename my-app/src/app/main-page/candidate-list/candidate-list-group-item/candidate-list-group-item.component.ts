@@ -1,8 +1,8 @@
 import { Component, OnInit, Output , EventEmitter } from '@angular/core';
-import { ApiService } from '../../api.service';
-import { Candidate } from '../../candidate';
+import { ApiService } from '../../../api.service';
+import { Candidate } from '../../../candidate';
 import {ChangeDetectionStrategy} from "@angular/core";
-import { Search } from '../../search';
+import { Search } from '../../../search';
 
 @Component({
   selector: 'app-candidate-list-group-item',

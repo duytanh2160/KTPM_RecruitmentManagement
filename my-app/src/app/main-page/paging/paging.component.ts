@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 
-import { ApiService } from '../api.service';
-import { Candidate } from '../candidate';
+import { ApiService } from '../../api.service';
+import { Candidate } from '../../candidate';
 
 
 @Component({

@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { StringFilterPipe } from '../string-filter.pipe';
+import { StringFilterPipe } from '../../string-filter.pipe';
 
 import { CandidatelistComponent } from './candidatelist/candidatelist.component';
 import { CandidateListSearchComponent } from './candidate-list-search/candidate-list-search.component';

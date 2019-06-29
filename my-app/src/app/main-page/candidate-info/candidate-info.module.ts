@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { BrowserModule } from '@angular/platform-browser';
 import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 
 @NgModule({
@@ -14,7 +13,6 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
     LoadingpageComponent,
   ],
   imports: [
-    BrowserModule,
     ReactiveFormsModule,
     CommonModule,
     HttpClientModule,
