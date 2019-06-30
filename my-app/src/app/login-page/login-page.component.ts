@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-login-page',
@@ -44,11 +45,18 @@ export class LoginPageComponent implements OnInit {
       });
     }
   }
-
+  doubleMd5Hash(text : string){
+    text = text.toLowerCase();
+    return Md5.hashStr('' + Md5.hashStr(text));
+  }
 
   login(acc) {
     this.isProcessing = true;
-    this.apiService.login(acc).subscribe(
+
+    var params = JSON.parse(JSON.stringify(acc));
+    params.Password = this.doubleMd5Hash(params.Password);
+
+    this.apiService.login(params).subscribe(
       (res) => {
         this.isProcessing = false;
         if (res !== null) {

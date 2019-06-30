@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/api.service';
 import Swal from 'sweetalert2';
+import {Md5} from 'ts-md5/dist/md5'
 
 @Component({
   selector: 'app-accountlist',
   templateUrl: './accountlist.component.html',
   styleUrls: ['./accountlist.component.css']
 })
+
+
 export class AccountlistComponent implements OnInit {
   isProcessing : boolean;
   isAddForm : boolean;
@@ -33,6 +36,10 @@ export class AccountlistComponent implements OnInit {
   }
 
   ngOnInit() { }
+  doubleMd5Hash(text : string){
+    text = text.toLowerCase();
+    return Md5.hashStr('' + Md5.hashStr(text));
+  }
   showAlert(text, type) {
     if (type === "success") {
       Swal.fire({
@@ -130,6 +137,7 @@ export class AccountlistComponent implements OnInit {
   onAddSubmit(acc : any){
     this.isProcessing = true;
     acc.RoleID = acc.Role.ID;
+    acc.Password = this.doubleMd5Hash(acc.Password);
     console.log("On Add: ",acc);
     this.apiService.addAccount(acc).subscribe(
       (res) => {
@@ -149,6 +157,7 @@ export class AccountlistComponent implements OnInit {
   onUpdateSubmit(acc : any){
     this.isProcessing = true;
     acc.RoleID = acc.Role.ID;
+    acc.Password = this.doubleMd5Hash(acc.Password);
     console.log("On Update: ",acc);
 
     this.apiService.updateAccount(acc).subscribe(

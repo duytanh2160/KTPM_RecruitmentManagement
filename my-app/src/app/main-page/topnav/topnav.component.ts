@@ -12,12 +12,8 @@ export class TopnavComponent implements OnInit {
   Account : any;
 
   constructor(private titleService: Title,private route:ActivatedRoute, private router:Router) { 
-    if(localStorage.getItem('user') === null){
-      this.router.navigate(['/Login']);
-    }else{
-      this.Account = JSON.parse(localStorage.getItem('user'));
-      console.log(this.Account);
-    }
+    this.Account = JSON.parse(localStorage.getItem('user'));
+    console.log(this.Account);
 
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
