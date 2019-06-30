@@ -9,8 +9,15 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 })
 export class TopnavComponent implements OnInit {
   Title : string = "";
+  Account : any;
 
   constructor(private titleService: Title,private route:ActivatedRoute, private router:Router) { 
+    if(localStorage.getItem('user') === null){
+      this.router.navigate(['/Login']);
+    }else{
+      this.Account = JSON.parse(localStorage.getItem('user'));
+      console.log(this.Account);
+    }
 
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd) {
@@ -23,6 +30,13 @@ export class TopnavComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+
+
+  Logout(){
+    localStorage.removeItem('user');
+    this.router.navigate(['/Login']);
   }
 
 }

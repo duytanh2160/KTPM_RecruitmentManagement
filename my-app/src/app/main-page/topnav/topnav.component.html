@@ -1,8 +1,8 @@
 <div class="topnav">
   <p id="title">{{Title}}</p>
   <div id="navRightSide">
-      <img id="avatar" src="assets/images/avatar.jpg">
-      <p id="helloLabel">Hello, Admin !</p>
-      <a href="javascript:logOut();">Log out</a>
+      <img id="avatar" src="{{Account.Image}}">
+      <p id="helloLabel">Hello, {{Account.FullName}} !</p>
+      <a href="javascript:console.log('Logged Out');" (click)="Logout()">Log out</a>
   </div>
 </div>

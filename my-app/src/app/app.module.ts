@@ -21,6 +21,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { JobListModule } from './main-page/job-list/job-list.module';
 import { CandidateInfoModule } from './main-page/candidate-info/candidate-info.module';
 import { AccountListModule } from './main-page/account-list/account-list.module';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 
 
 
@@ -35,7 +37,9 @@ import { AccountListModule } from './main-page/account-list/account-list.module'
     RightSidebarComponent,
     FooterComponent,
     PagingComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginPageComponent,
+    LoadingpageComponent
   ],
   imports: [
     BrowserModule,

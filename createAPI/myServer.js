@@ -894,3 +894,30 @@ app.get('/roles', (req, res) => {
         }
     });
 });
+
+
+
+app.post('/login', (req, res) => {
+    let acc = req.body;
+
+    var query = `Select A.ID,A.UserName,A.Email,A.FullName,A.DeleteFlag,R.Name as RoleName, R.RoleRight, R.Image `
+    +           `From Account A, Role R `
+    +           `Where 1 = 1 `
+    +           `And A.RoleID = R.ID `
+    +           `And DeleteFlag = 'N' `
+    +           `And UserName = '${acc.UserName}' `
+    +           `And Password = '${acc.Password}' `;
+
+    request.query(query, (error, rows, fields) => {
+        if (error) {
+            res.write("" + error);
+            res.write("\nQuery: " + query);
+            res.end();
+        }
+        else {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.send(rows.recordset[0]); 
+            res.end();
+        }
+    });
+});

@@ -138,8 +138,14 @@ export class ApiService {
     return this.httpClient.post<any>(`${this.apiURL}/accounts/update`,obj);
   }
 
+
   public getRoles(){
     return this.httpClient.get<any[]>(`${this.apiURL}/roles`);
+  }
+
+
+  public login(obj){
+    return this.httpClient.post<any>(`${this.apiURL}/login`,obj);
   }
   
 

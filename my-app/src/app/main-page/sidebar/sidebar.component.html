@@ -9,28 +9,28 @@
           <a href="#candidateSubmenu" data-toggle="collapse" aria-expanded="true" class="dropdown-toggle">Candidate
               Management</a>
           <ul class="collapse list-unstyled" id="candidateSubmenu">
-              <li>
+              <li *ngIf="Account.RoleName === 'SuperAdmin' || Account.RoleName === 'CandidateAdmin' ">
                   <a routerLink="/Main/" routerLinkActive="active">Candidate list</a>
               </li>
-              <li>
+              <li *ngIf="Account.RoleName === 'SuperAdmin' || Account.RoleName === 'InterviewingAdmin' ">
                   <a routerLink="/Main/Interviewing" routerLinkActive="active">Interviewing</a>
               </li>
-              <li>
+              <li *ngIf="Account.RoleName === 'SuperAdmin' || Account.RoleName === 'OfferingAdmin' ">
                   <a routerLink="/Main/Offering" routerLinkActive="active">Offering</a>
               </li>
-              <li>
+              <li *ngIf="Account.RoleName === 'SuperAdmin' || Account.RoleName === 'ProbationAdmin' ">
                   <a routerLink="/Main/Probation" routerLinkActive="active">Probation</a>
               </li>
           </ul>
       </li>
 
       <!--JOB-->
-      <li>
+      <li *ngIf="Account.RoleName === 'SuperAdmin'">
         <a routerLink="/Main/Job" routerLinkActive="active">Job</a>
       </li>
 
       <!--ACCOUNT-->
-      <li>
+      <li *ngIf="Account.RoleName === 'SuperAdmin'">
         <a routerLink="/Main/Account" routerLinkActive="active">Account</a>
       </li>
   </ul>

@@ -15,6 +15,8 @@ import { CandidateListGroupItemComponent } from '../candidate-list-group-item/ca
 export class CandidatelistComponent implements OnInit {
   @ViewChild(CandidateListGroupItemComponent) CandGroup : CandidateListGroupItemComponent;
 
+  Account : any;
+
   JobList: any[];
   JobListDetail: Job[];
   JobLevelList: any[];
@@ -58,6 +60,7 @@ export class CandidatelistComponent implements OnInit {
 
 
   constructor(private apiService: ApiService) {
+
     this.isProcessing = true;
     this.getJobList();
     this.getJobLevelsList();

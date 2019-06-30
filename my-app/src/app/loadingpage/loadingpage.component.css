@@ -1,0 +1,33 @@
+#loading {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.7;
+    background-color: black;
+    z-index: 9998;
+    text-align: center;
+ }
+ 
+ #loading-image {
+   filter: blur(0px);
+   height: 200px;
+    z-index: 9999;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+
+ #loading-text {
+   height: 200px;
+    z-index: 9999;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
