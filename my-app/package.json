@@ -23,7 +23,7 @@
     "@types/jquery": "^3.3.29",
     "angularjs-bootstrap-datetimepicker": "^1.1.4",
     "core-js": "^2.5.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "ng-multiselect-dropdown": "^0.2.3",
     "ngx-pagination": "^3.2.1",
     "rxjs": "~6.3.3",
